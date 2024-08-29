@@ -210,7 +210,7 @@
                 </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+              <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -218,7 +218,8 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+              </form>
+             </div>
         </div>
     </div>
 </div>

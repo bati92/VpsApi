@@ -35,7 +35,7 @@ class AppSectionContoller extends Controller
         $input = $request->all();
         if ($file = $request->file('image')) {
             $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('assest/images/appSection/', $name);
+            $file->move('assets/images/appSection/', $name);
             $input['image'] = $name;
          }
         AppSection::create($input);

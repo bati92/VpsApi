@@ -116,7 +116,7 @@
                 <h4 class="title" id="defaultModalLabeldelete">هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('turkification.destroy', $turkification->id) }}" method="POST">
+             <form action="{{ route('turkification.destroy', $turkification->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -124,7 +124,8 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+              </form>
+            </div>
         </div>
     </div>
 </div>

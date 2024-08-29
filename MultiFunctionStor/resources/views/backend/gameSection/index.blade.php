@@ -8,8 +8,7 @@
     <div class="container-fluid">
         @if(session()->has('message'))
         <div class="alert alert-success" 
-            style="
-            position: absolute;
+            style="position: absolute;
             z-index: 99999;
             top: 10%;
             left: 30%;
@@ -30,7 +29,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="d-flex flex-row-reverse">
                         <div class="page_action">
-                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-primary" data-target="#createmodal" ><i class="fa fa-add">إضافة شركة شحن جديدة</i></a>
+                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-primary" data-target="#createmodal" ><i class="fa fa-add">أضف قسم جديد</i></a>
                         </div>
                         <div class="p-2 d-flex">
                         </div>
@@ -41,32 +40,32 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2>شركات الشحن</h2>
+                            <h2>الالعاب</h2>
                         </div>
                         <div class="body project_report">
                             <div class="table-responsive">
                                 <table class="table table-hover js-basic-example dataTable table-custom mb-0">
                                     <thead>
                                         <tr>                                            
-                                            <th>اسم شركة الشحن</th>
-                                            <th>iban</th>
-                                            <th>اسم صاحب الحساب</th>
+                                            <th>اسم قسم الالعاب</th>
+                                            <th> الصورة </th>
+                                            
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($transferMoneyFirms as $key => $transferMoneyFirm)
+                                        @foreach ($games as $key => $game)
                                         <tr>
                                             <td class="project-title">
-                                                <h6>{{$transferMoneyFirm->name}}</h6>
+                                                <h6>{{$game->name}}</h6>
                                             </td>
-                                            <td>{{$transferMoneyFirm->iban}}</td>
-                                            <td>{{$transferMoneyFirm->account_name}}</td>
+                                            <td><img src="{{asset('assets/images/gameSection/'.$game->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                    
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
-                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$transferMoneyFirm->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
-                                                <a  href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$transferMoneyFirm->id}}" class="btn btn-sm btn-outline-danger" ><i class="icon-trash"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$game->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                                                <a  href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$game->id}}" class="btn btn-sm btn-outline-danger" ><i class="icon-trash"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -86,21 +85,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabelcreate">إضافة شركة شحن جديدة</h4>
+                <h4 class="title" >إضافة قسم تطبيقات جديد</h4>
             </div>
             <div class="modal-body"> 
-                <form method="Post" action="{{ route('transfer-money-firm.store') }}" enctype="multipart/form-data">
+                <form method="Post" action="{{ route('game-section.store') }}" enctype="multipart/form-data">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" required placeholder="اسم شركة الشحن"  name="name" aria-label="name" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
+               
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" required placeholder="iban"  name="iban" aria-label="iban" aria-describedby="basic-addon2">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required placeholder="اسم صاحب الحساب"  name="account_name" aria-label="account_name" aria-describedby="basic-addon2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">الصورة</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
+                        </div>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <!-- <input type="hidden" name="transfer_money_firm" value="1" /> -->
                     <div class="modal-footer">   
                         <button type="submit" class="btn btn-primary">حفظ</button>
                         <a href="#" class="btn btn-secondary">الغاء الأمر</a>
@@ -112,54 +114,55 @@
 </div>
 
 <!--------------delete -------------->
-@foreach ($transferMoneyFirms as $key => $transferMoneyFirm)
-<div class="modal fade" id="deleteModal{{$transferMoneyFirm->id}}" tabindex="-1" role="dialog">
+@foreach ($games as $key => $game)
+<div class="modal fade" id="deleteModal{{$game->id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabeldelete">هل أنت بالتاكيد تريد الحذف </h4>
+                <h4 class="title" >هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('transfer-money-firm.destroy', $transferMoneyFirm->id) }}" method="POST">
+             <form action="{{ route('game-section.destroy', $game->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-               <!-- <input type="hidden" name="transfer_money_firm" value="1" /> -->
-
                <div class="modal-footer">
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+             </form>
+            </div>
         </div>
     </div>
 </div>
 @endforeach
 
 <!--------------edit -------------->
-@foreach ($transferMoneyFirms as $key => $transferMoneyFirm)
-<div class="modal fade" id="editModal{{$transferMoneyFirm->id}}" tabindex="-1" role="dialog">
+@foreach ($games as $key => $game)
+<div class="modal fade" id="editModal{{$game->id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabeledit">تعديل معلومات شركة شحن </h4>
+                <h4 class="title" >تعديل معلومات القسم </h4>
             </div>
             <div class="modal-body"> 
-                <form method="POST" action="{{ route('transfer-money-firm.update', ['transferMoneyFirm' => $transferMoneyFirm->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('game-section.update', $game->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$transferMoneyFirm->name}}" required placeholder="اسم شركة الشحن"  name="name" aria-label="name" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" value="{{$game->name}}" required placeholder="الاسم" name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$transferMoneyFirm->iban}}" required placeholder="iban"  name="iban" aria-label="iban" aria-describedby="basic-addon2">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$transferMoneyFirm->account_name}}" required placeholder="اسم صاحب الحساب"  name="account_name" aria-label="account_name" aria-describedby="basic-addon2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">الصورة</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">اختر الصورة </label>
+                        </div>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <!-- <input type="hidden" name="transfer_money_firm" value="1" /> -->
-
+                               
                     <div class="modal-footer"> 
                         <button type="submit" class="btn btn-primary">حفظ</button>
                         <a href="#" class="btn btn-secondary">الغاء الأمر</a>

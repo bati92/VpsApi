@@ -59,7 +59,7 @@
                                             <td class="project-title">
                                                 <h6>{{$app->name}}</h6>
                                             </td>
-                                            <td><img src="{{ asset('assets/images/{!!$app->image!!}')}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="{{asset('assets/images/appSection/'.$app->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                     
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
@@ -88,14 +88,14 @@
                 <h4 class="title" >إضافة قسم تطبيقات جديد</h4>
             </div>
             <div class="modal-body"> 
-                <form method="Post" action="{{ route('app-sections.store') }}" enctype="multipart/form-data">
+                <form method="Post" action="{{ route('app-section.store') }}" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
                
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">تحميل</span>
+                            <span class="input-group-text">الصورة</span>
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" name="image">
@@ -122,7 +122,7 @@
                 <h4 class="title" >هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('app-sections.destroy', $app->id) }}" method="POST">
+             <form action="{{ route('app-section.destroy', $app->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -130,7 +130,8 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+             </form>
+            </div>
         </div>
     </div>
 </div>
@@ -145,7 +146,7 @@
                 <h4 class="title" >تعديل معلومات تطبيق </h4>
             </div>
             <div class="modal-body"> 
-                <form method="POST" action="{{ route('app-sections.update', $app->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('app-section.update', $app->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="input-group mb-3">
@@ -153,7 +154,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">تحميل</span>
+                            <span class="input-group-text">الصورة</span>
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" name="image">

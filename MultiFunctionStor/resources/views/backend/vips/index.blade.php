@@ -113,7 +113,7 @@
                 <h4 class="title" id="defaultModalLabeldelete">هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('vip.destroy', $vip->id) }}" method="POST">
+             <form action="{{ route('vip.destroy', $vip->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -121,7 +121,8 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+             </form>
+            </div>
         </div>
     </div>
 </div>
@@ -136,7 +137,7 @@
                 <h4 class="title" id="defaultModalLabeledit">تعديل معلومات العميل </h4>
             </div>
             <div class="modal-body"> 
-                <form method="POST"  action="{{ route('vip.update', ['vip' => $vip->id]) }}" enctype="multipart/form-data">
+                <form method="POST"  action="{{ route('vip.update', $vip->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="input-group mb-3">

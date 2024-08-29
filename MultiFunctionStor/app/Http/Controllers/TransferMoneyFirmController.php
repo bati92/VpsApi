@@ -24,7 +24,11 @@ class TransferMoneyFirmController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-       
+        if ($file = $request->file('image')) {
+            $name = 'app'.time().$file->getClientOriginalName();
+            $file->move('assets/images/TransferMoneyFirm/', $name);
+            $input['image'] = $name;
+         }
         TransferMoneyFirm::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -34,18 +38,26 @@ class TransferMoneyFirmController extends Controller
     }
 
     public function edit( $id)
-    {
+    { 
     }
 
     public function update(Request $request,  $id)
     {
         $transferMoneyFirm = TransferMoneyFirm::findOrFail($id);
         $input = $request->all();
-       
+        $input = $request->all();
+
+        if ($file = $request->file('image')) {
+            $name = 'app'.time().$file->getClientOriginalName();
+            $file->move('assets/images/TransferMoneyFirm/', $name);
+            $input['image'] = $name;
+         }
         $transferMoneyFirm->update([
            'name' => $input['name'],
            'iban' => $input['iban'],
            'account_name' => $input['account_name'],
+           
+           'image' => $input['image'],
         ]);
         
         return back()->with('message', 'تم التعديل بنجاح');

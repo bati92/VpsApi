@@ -121,7 +121,7 @@
                 <h4 class="title" id="defaultModalLabeldelete">هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('app-order.destroy', $appOrder->id) }}" method="POST">
+              <form action="{{ route('app-order.destroy', $appOrder->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -131,7 +131,8 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+               </form>
+            </div> 
         </div>
     </div>
 </div>
@@ -146,7 +147,7 @@
                 <h4 class="title" id="defaultModalLabeledit">تعديل معلومات طلب التطبيق </h4>
             </div>
             <div class="modal-body"> 
-                <form method="POST" action="{{ route('app-order.update', ['appOrder' => $appOrder->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('app-order.update',  $appOrder->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="input-group mb-3">

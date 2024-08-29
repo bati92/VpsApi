@@ -46,15 +46,21 @@
                                     <li><a href="/users/2/category">الوكلاء</a></li>
                                     <li><a href="/users/3/category">أصحاب المحلات</a></li>
                                     <li><a href="/users/4/category">زبون عادي</a></li>
+                                    <li><a href="/vip/">أنواع العملاء</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#App" class="has-arrow"><i class="fa fa-th-large"></i><span>الخدمات</span></a>
                                 <ul>
-                                    <li><a href="/turkification/">التتريك</a></li>
-                                    <li><a href="/vip/">أنواع العملاء</a></li>
-                                    <li><a href="/app/">قسم الألعاب</a></li>
+                              <!--      <li><a href="/turkification/">التتريك</a></li>
+                                    
                                     <li><a href="/app-order/">طلبات قسم الألعاب</a></li>
+                              
+                              
+                              -->
+                              <li><a href="/app-sections">قسم  التطبيقات</a>
+                              </li>    
+                                    <li><a href="">قسم الألعاب</a></li>
                                     <li><a href="/transfer-money-firm/">قسم شركات الشحن</a></li>
                                     <li><a href="/transfer-money-firm-order/">طلبات قسم شركات الشحن</a></li>
                                     
@@ -66,63 +72,32 @@
                                             <li><a href="bog-details.html">4</a></li>
                                         </ul>
                                 </li>
-                                    <li><a href="app-calendar.html">قسم شحن التطبيقات</a>
-                                    <ul>
-                                            <li><a href="blog-dashboard.html">1</a></li>
-                                            <li><a href="blog-post.html">2</a></li>
-                                            <li><a href="blog-list.html">3</a></li>
-                                            <li><a href="blog-details.html">4</a></li>
-                                        </ul></li>     
+                                    
                                                           
                                         <li><a href="app-calendar.html"> قسم البيانات </a>
-                                    <ul>
-                                            <li><a href="blog-dashboard.html">1</a></li>
-                                            <li><a href="blog-post.html">2</a></li>
-                                            <li><a href="blog-list.html">3</a></li>
-                                            <li><a href="blog-details.html">4</a></li>
-                                        </ul>
+                               
                                     </li> 
                                     <li><a href="app-calendar.html">قسم البطاقات الرقمية</a>
-                                    <ul>
-                                        <li><a href="blog-dashboard.html">1</a></li>
-                                        <li><a href="blog-post.html">2</a></li>
-                                        <li><a href="blog-list.html">3</a></li>
-                                        <li><a href="blog-details.html">4</a></li>
-                                    </ul>
+                                 
                                     </li>
                                     
                                     
                                     <li><a href="/transfer-money-firm/">قسم البنوك الرقمية</a>
-                                    <ul>
-                                            <li><a href="/transfer-money-firm/">1</a></li>
-                                            <li><a href="blog-post.html">2</a></li>
-                                            <li><a href="blog-list.html">3</a></li>
-                                            <li><a href="blog-details.html">4</a></li>
-                                        </ul>
+                                 
                                     </li> 
 
                                     <li><a href="app-calendar.html">خدمة تفيل البرامج</a>
-                                    <ul>
-                                            <li><a href="blog-dashboard.html">1</a></li>
-                                            <li><a href="blog-post.html">2</a></li>
-                                            <li><a href="blog-list.html">3</a></li>
-                                            <li><a href="blog-details.html">4</a></li>
-                                        </ul>
+                                
                                     </li> 
 
                                     <li><a href="app-calendar.html">  بطاقاتنا</a>
-                                    <ul>
-                                            <li><a href="blog-dashboard.html">1</a></li>
-                                            <li><a href="blog-post.html">2</a></li>
-                                            <li><a href="blog-list.html">3</a></li>
-                                            <li><a href="blog-details.html">4</a></li>
-                                        </ul>
+                                 
                                     </li> 
                                 </ul>
                             </li>
                     
                             <li>
-                                <a href="#forms" class=""><i class="fa fa-user"></i><span>المستخدمين</span></a>
+                                <a href="/users/1/category" class=""><i class="fa fa-user"></i><span>المستخدمين</span></a>
                             
                             </li>
                             <li>

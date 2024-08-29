@@ -29,7 +29,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="d-flex flex-row-reverse">
                         <div class="page_action">
-                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-primary" data-target="#createmodal" ><i class="fa fa-add">إضافة نوع عميل جديد</i></a>
+                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-primary" data-target="#createmodal" ><i class="fa fa-add">أضف قسم جديد</i></a>
                         </div>
                         <div class="p-2 d-flex">
                         </div>
@@ -40,30 +40,46 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2> عمولات الوكلاء</h2>
+                            <h2>الالعاب</h2>
                         </div>
                         <div class="body project_report">
                             <div class="table-responsive">
                                 <table class="table table-hover js-basic-example dataTable table-custom mb-0">
                                     <thead>
                                         <tr>                                            
-                                            <th>نوع العميل</th>
-                                            <th>نسبة العمولة</th>
+                                            <th>اسم  اللعبة</th>
+                                            <th> الصورة </th>
+                                            <th> القسم </th>
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
-                                        @foreach ($vips as $key => $vip)
+                                        @foreach ($games as $key => $game)
                                         <tr>
                                             <td class="project-title">
-                                                <h6>{{$vip->role_name}}</h6>
+                                                <h6>{{$game->name}}</h6>
                                             </td>
-                                            <td>{{$vip->commession_percent}}</td>
+                                        
+
+                                            <td><img src="{{asset('assets/images/game/'.$game->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td class="project-title">
+                                                <h6>  
+                                                    @foreach ($games_sections as $key => $section)
+                                                      @if( $game->game_id==$section->id)
+                                                         {{$section->name}}
+                                                         @break
+                                                    
+                                                     @endif
+
+                                                    @endforeach
+                                                </h6>
+                                            </td>
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
-                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$vip->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
-                                                <a  href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$vip->id}}" class="btn btn-sm btn-outline-danger" ><i class="icon-trash"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$game->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                                                <a  href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$game->id}}" class="btn btn-sm btn-outline-danger" ><i class="icon-trash"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -83,15 +99,31 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabelcreate">إضافة نوع عميل جديد</h4>
+                <h4 class="title" >إضافة  لعبة  جديد</h4>
             </div>
             <div class="modal-body"> 
-                <form method="Post" action="{{ route('vip.store') }}" enctype="multipart/form-data">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" required placeholder="نوع العميل"  name="role_name" aria-label="role_name" aria-describedby="basic-addon2">
+                <form method="Post" action="{{ route('game.store') }}" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                       <select class="custom-select" required name="game_id" >
+                       <option value="" selected>اختر القسم</option>
+                           @foreach ($games_sections as $key => $section)
+                            <option value="{{$section->id}}" >{{$section->name}}</option>
+
+                           @endforeach
+                         </select>     
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" required placeholder="نسبة العمولة"  name="commession_percent" aria-label="commession_percent" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">
+                    </div>
+               
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">الصورة</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
+                        </div>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="modal-footer">   
@@ -105,15 +137,15 @@
 </div>
 
 <!--------------delete -------------->
-@foreach ($vips as $key => $vip)
-<div class="modal fade" id="deleteModal{{$vip->id}}" tabindex="-1" role="dialog">
+@foreach ($games as $key => $game)
+<div class="modal fade" id="deleteModal{{$game->id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabeldelete">هل أنت بالتاكيد تريد الحذف </h4>
+                <h4 class="title" >هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('vip.destroy', $vip->id) }}" method="POST">
+             <form action="{{ route('game.destroy', $game->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -121,29 +153,48 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+             </form>
+            </div>
         </div>
     </div>
 </div>
 @endforeach
 
 <!--------------edit -------------->
-@foreach ($vips as $key => $vip)
-<div class="modal fade" id="editModal{{$vip->id}}" tabindex="-1" role="dialog">
+@foreach ($games as $key => $game)
+<div class="modal fade" id="editModal{{$game->id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="defaultModalLabeledit">تعديل معلومات العميل </h4>
+                <h4 class="title" >تعديل معلومات اللعبة </h4>
             </div>
             <div class="modal-body"> 
-                <form method="POST"  action="{{ route('vip.update', ['vip' => $vip->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('game.update', $game->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
+
+                    <select class="custom-select" required name="game_id" >
+             
+                           @foreach ($games_sections as $key => $section)
+                               @if( $game->game_id==$section->id)
+                            <option value="{{$section->id}}" selected>{{$section->name}}</option>
+                                @else
+                            <option value="{{$section->id}}" >{{$section->name}}</option>
+                                @endif
+
+                           @endforeach
+                    </select> 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$vip->role_name}}" required placeholder="نوع العميل"  name="role_name" aria-label="role_name" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" value="{{$game->name}}" required placeholder="الاسم" name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$vip->commession_percent}}" required placeholder="نسبة العمولة"  name="commession_percent" aria-label="commession_percent" aria-describedby="basic-addon2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">الصورة</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">اختر الصورة </label>
+                        </div>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                

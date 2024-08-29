@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Models\App;
+use App\Models\GameSection;
+use App\Models\Game;
 use Illuminate\Support\Facades\DB;
-
-class AppController extends Controller
+class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    {
-       $apps=DB::table('apps')->select('*')->orderBy('id', 'desc')->paginate(500);
-       return view('backend.apps.index', compact('apps'));
+    { 
+        $games=DB::table('games')->select('*')->orderBy('id', 'desc')->paginate(500);
+        
+        $games_sections=DB::table('game_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
+        return view('backend.games.index', compact('games','games_sections'));
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('backend.apps.create');
+        //
     }
 
     /**
@@ -33,11 +31,11 @@ class AppController extends Controller
     {
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
+            $name = 'game'.time().$file->getClientOriginalName();
+            $file->move('assets/images/game/', $name);
             $input['image'] = $name;
          }
-        App::create($input);
+        Game::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
@@ -46,6 +44,7 @@ class AppController extends Controller
      */
     public function show(string $id)
     {
+        //
     }
 
     /**
@@ -53,6 +52,7 @@ class AppController extends Controller
      */
     public function edit(string $id)
     {
+        //
     }
 
     /**
@@ -60,22 +60,21 @@ class AppController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $app = App::findOrFail($id);
+        $game = Game::findOrFail($id);
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'app_'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
+            $name = 'game'.time().$file->getClientOriginalName();
+            $file->move('assets/images/game/', $name);
             $input['image'] = $name;
         }
-        $app->update([
+        $game->update([
         'name' => $input['name'],
-        'player_no' => $input['player_no'],
-        'price' => $input['price'],
+        'game_id' => $input['game_id'],
+        'image' => $input['image'],
+        
         ]);
        
         return back()->with('message', 'تم التعديل بنجاح');
-
-        //if faile?
     }
 
     /**
@@ -83,8 +82,7 @@ class AppController extends Controller
      */
     public function destroy(string $id)
     {
-        $app= App::findOrFail($id);
-        $app->delete();
+        $game= Game::findOrFail($id);
+        $game->delete();
         return back()->with('message', 'تم الحذف  بنجاح');
-    }
-}
+    }}

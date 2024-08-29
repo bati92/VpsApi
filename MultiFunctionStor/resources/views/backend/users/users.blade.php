@@ -197,7 +197,7 @@
     </div>
 </div>
 
-<!--------------deletepppppppp -------------->
+<!--------------delete -------------->
 @foreach ($users as $key => $user)
 <div class="modal fade" id="deleteModal{{$user->id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

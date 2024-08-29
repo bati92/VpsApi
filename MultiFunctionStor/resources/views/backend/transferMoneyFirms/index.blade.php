@@ -49,6 +49,7 @@
                                     <thead>
                                         <tr>                                            
                                             <th>اسم شركة الشحن</th>
+                                            <th>  الصورة</th>
                                             <th>iban</th>
                                             <th>اسم صاحب الحساب</th>
                                             <th>العمليات</th>
@@ -60,6 +61,8 @@
                                             <td class="project-title">
                                                 <h6>{{$transferMoneyFirm->name}}</h6>
                                             </td>
+                                            <td><img src="{{asset('assets/images/transferMoneyFirm/'.$transferMoneyFirm->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                    
                                             <td>{{$transferMoneyFirm->iban}}</td>
                                             <td>{{$transferMoneyFirm->account_name}}</td>
                                             <td class="project-actions">
@@ -87,7 +90,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="title" id="defaultModalLabelcreate">إضافة شركة شحن جديدة</h4>
-            </div>
+            </div> 
             <div class="modal-body"> 
                 <form method="Post" action="{{ route('transfer-money-firm.store') }}" enctype="multipart/form-data">
                     <div class="input-group mb-3">
@@ -98,6 +101,16 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" required placeholder="اسم صاحب الحساب"  name="account_name" aria-label="account_name" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">تحميل</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
+                        </div>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <!-- <input type="hidden" name="transfer_money_firm" value="1" /> -->
@@ -120,7 +133,7 @@
                 <h4 class="title" id="defaultModalLabeldelete">هل أنت بالتاكيد تريد الحذف </h4>
             </div>
             <div class="modal-body"> 
-            <form action="{{ route('transfer-money-firm.destroy', $transferMoneyFirm->id) }}" method="POST">
+             <form action="{{ route('transfer-money-firm.destroy', $transferMoneyFirm->id) }}" method="POST">
                @csrf
                @method('DELETE')
                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -130,7 +143,8 @@
                    <button type="submit" class="btn btn-primary">نعم</button>
                    <a href="#" class="btn btn-secondary">الغاء الأمر</a>
                </div>
-            </form>
+             </form>
+             </div>
         </div>
     </div>
 </div>
@@ -145,7 +159,7 @@
                 <h4 class="title" id="defaultModalLabeledit">تعديل معلومات شركة شحن </h4>
             </div>
             <div class="modal-body"> 
-                <form method="POST" action="{{ route('transfer-money-firm.update', ['transferMoneyFirm' => $transferMoneyFirm->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('transfer-money-firm.update',  $transferMoneyFirm->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="input-group mb-3">
@@ -156,6 +170,16 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" value="{{$transferMoneyFirm->account_name}}" required placeholder="اسم صاحب الحساب"  name="account_name" aria-label="account_name" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">تحميل</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
+                        </div>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <!-- <input type="hidden" name="transfer_money_firm" value="1" /> -->

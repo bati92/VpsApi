@@ -21,6 +21,7 @@ class TransferMoneyFirm extends Model
         'name',
         'iban',
         'account_name',
+        'image',
     ];
     
     public function users(): BelongsToMany
