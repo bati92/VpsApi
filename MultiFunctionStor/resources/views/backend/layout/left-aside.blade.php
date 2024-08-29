@@ -52,47 +52,38 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="fa fa-th-large"></i><span>الخدمات</span></a>
                                 <ul>
-                              <!--      <li><a href="/turkification/">التتريك</a></li>
-                                    
-                                    <li><a href="/app-order/">طلبات قسم الألعاب</a></li>
-                              
-                              
-                              -->
-                              <li><a href="/app-sections">قسم  التطبيقات</a>
-                              </li>    
+                                         
+                                    <li><a href="/app-sections">قسم  التطبيقات</a>
+                                    </li>    
                                     <li><a href="">قسم الألعاب</a></li>
                                     <li><a href="/transfer-money-firm/">قسم شركات الشحن</a></li>
+                                   
+                                    <li><a href="/game-section">قسم الألعاب</a>
+                               
+                                    </li>
+                                                   
+                                     <li><a href="/data">  قسم البيانات والاتصالات</a>
+                               
+                                     </li> 
+                                      <li><a href="/ebank-section">قسم البنوك الرقمية</a>
+                                 
+                                       </li> 
+
+                                    <li><a href="/program">خدمة تفيل البرامج</a>
+                                     </li> 
+
+                                    <li><a href="/card">  بطاقاتنا</a>
+                                    </li>
+                                    <li><a href="#">قسم البطاقات الرقمية</a>
+                                    </li> 
+                                      <!--      <li><a href="/turkification/">التتريك</a></li>
+                                    
+                                    <li><a href="/app-order/">طلبات قسم الألعاب</a></li>
                                     <li><a href="/transfer-money-firm-order/">طلبات قسم شركات الشحن</a></li>
                                     
-                                    <li><a href="/app.html/">قسم الألعاب</a>
-                                    <ul>
-                                            <li><a href="blog-dashboard.html">1</a></li>
-                                            <li><a href="blog-post.html">2</a></li>
-                                            <li><a href="blog-list.html">3</a></li>
-                                            <li><a href="bog-details.html">4</a></li>
-                                        </ul>
-                                </li>
-                                    
-                                                          
-                                        <li><a href="app-calendar.html"> قسم البيانات </a>
-                               
-                                    </li> 
-                                    <li><a href="app-calendar.html">قسم البطاقات الرقمية</a>
-                                 
-                                    </li>
-                                    
-                                    
-                                    <li><a href="/transfer-money-firm/">قسم البنوك الرقمية</a>
-                                 
-                                    </li> 
-
-                                    <li><a href="app-calendar.html">خدمة تفيل البرامج</a>
-                                
-                                    </li> 
-
-                                    <li><a href="app-calendar.html">  بطاقاتنا</a>
-                                 
-                                    </li> 
+                              
+                                        -->
+                              
                                 </ul>
                             </li>
                     

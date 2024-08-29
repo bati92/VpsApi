@@ -1,29 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
- 
-use Illuminate\Support\Facades\Route;
+
 use Illuminate\Http\Request;
-use App\Models\App;
+use App\Models\EbankSection;
+use App\Models\Ebank;
 use Illuminate\Support\Facades\DB;
 
-class AppController extends Controller
+class EbankController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    {
-       $apps=DB::table('apps')->select('*')->orderBy('id', 'desc')->paginate(500);
-       return view('backend.apps.index', compact('apps'));
+    { 
+        $ebanks=DB::table('ebanks')->select('*')->orderBy('id', 'desc')->paginate(500);
+        
+        $ebanks_sections=DB::table('ebank_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
+        return view('backend.ebanks.index', compact('ebanks','ebanks_sections'));
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('backend.apps.create');
+        //
     }
 
     /**
@@ -33,11 +32,11 @@ class AppController extends Controller
     {
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
+            $name = 'ebank'.time().$file->getClientOriginalName();
+            $file->move('assets/images/ebanks/', $name);
             $input['image'] = $name;
          }
-        App::create($input);
+        Ebank::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
@@ -46,6 +45,7 @@ class AppController extends Controller
      */
     public function show(string $id)
     {
+        //
     }
 
     /**
@@ -53,6 +53,7 @@ class AppController extends Controller
      */
     public function edit(string $id)
     {
+        //
     }
 
     /**
@@ -60,23 +61,21 @@ class AppController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $app = App::findOrFail($id);
+        $e = Ebank::findOrFail($id);
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'app_'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
+            $name = 'ebank'.time().$file->getClientOriginalName();
+            $file->move('assets/images/ebank/', $name);
             $input['image'] = $name;
         }
-        $app->update([
+        $e->update([
         'name' => $input['name'],
-        'player_no' => $input['player_no'],
-        'price' => $input['price'],
+        'image' => $input['image'],
+        'bank_id' => $input['bank_id'],
         
         ]);
        
         return back()->with('message', 'تم التعديل بنجاح');
-
-        //if faile?
     }
 
     /**
@@ -84,8 +83,9 @@ class AppController extends Controller
      */
     public function destroy(string $id)
     {
-        $app= App::findOrFail($id);
-        $app->delete();
+        $e= Ebank::findOrFail($id);
+        $e->delete();
         return back()->with('message', 'تم الحذف  بنجاح');
     }
+
 }

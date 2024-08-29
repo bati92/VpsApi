@@ -30,6 +30,15 @@ use App\Http\Controllers\GameSectionController;
 use App\Http\Controllers\GameOrderController;
 use App\Http\Controllers\GameController;
 
+use App\Http\Controllers\EbankController;
+use App\Http\Controllers\EbankSectionController;
+use App\Http\Controllers\EbankOrderController;
+
+use App\Http\Controllers\ProgramController;
+
+use App\Http\Controllers\CardController;
+
+use App\Http\Controllers\DataController;
 
 
 Route::get('/', function () {
@@ -59,6 +68,18 @@ Route::resource('transfer-money-firm-order' , TransferMoneyFirmOrderController::
  
 
 
-Route::resource(  'game' , GameController::class,);
+Route::resource('game' , GameController::class,);
 Route::resource('game-section' , GameSectionController::class,);
-Route::resource( 'game-order' , GameOrderController::class,);
+Route::resource('game-order' , GameOrderController::class,);
+
+
+Route::resource('ebank' , EbankController::class,);
+Route::resource('ebank-section' , EbankSectionController::class,);
+Route::resource('ebank-order' , EbankOrderController::class,);
+
+
+Route::resource('program' , ProgramController::class,);
+
+Route::resource('card' , CardController::class,);
+
+Route::resource('data' , DataController::class,);

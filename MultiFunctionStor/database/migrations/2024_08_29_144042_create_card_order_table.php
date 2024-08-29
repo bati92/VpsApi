@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_order', function (Blueprint $table) {
+        Schema::create('card_order', function (Blueprint $table) {
             $table->id();
-            $table->integer('game_id');
+            $table->integer('card_id');
             $table->integer('user_id');
-            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
+            $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('user_id_game');//ايدية اليوزر باللعبة
-            $table->string('name')->nullable();
-            $table->integer('price');
-            $table->string('note')->nullable();
+            $table->string('price');
+            $table->integer('count');
+            $table->string('note');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_order');
+        Schema::dropIfExists('card_order');
     }
 };

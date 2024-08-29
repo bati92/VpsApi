@@ -1,29 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
- 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Models\App;
-use Illuminate\Support\Facades\DB;
 
-class AppController extends Controller
+use Illuminate\Http\Request;
+
+use App\Models\Transfer;
+class TransferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    {
-       $apps=DB::table('apps')->select('*')->orderBy('id', 'desc')->paginate(500);
-       return view('backend.apps.index', compact('apps'));
+    { 
+        $transfers=DB::table('transfers')->select('*')->orderBy('id', 'desc')->paginate(500);
+        
+           return view('backend.transfer.index', compact('transfers'));
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('backend.apps.create');
+        //
     }
 
     /**
@@ -33,11 +29,11 @@ class AppController extends Controller
     {
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
+            $name = 'transfer'.time().$file->getClientOriginalName();
+            $file->move('assets/images/transfer/', $name);
             $input['image'] = $name;
          }
-        App::create($input);
+         Transfer::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
@@ -46,6 +42,7 @@ class AppController extends Controller
      */
     public function show(string $id)
     {
+        //
     }
 
     /**
@@ -53,6 +50,7 @@ class AppController extends Controller
      */
     public function edit(string $id)
     {
+        //
     }
 
     /**
@@ -60,23 +58,20 @@ class AppController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $app = App::findOrFail($id);
+        $transfer = Transfer::findOrFail($id);
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'app_'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
+            $name = 'transfer'.time().$file->getClientOriginalName();
+            $file->move('assets/images/transfer/', $name);
             $input['image'] = $name;
         }
-        $app->update([
+        $transfer->update([
         'name' => $input['name'],
-        'player_no' => $input['player_no'],
-        'price' => $input['price'],
+        'image' => $input['image'],
         
         ]);
        
         return back()->with('message', 'تم التعديل بنجاح');
-
-        //if faile?
     }
 
     /**
@@ -84,8 +79,8 @@ class AppController extends Controller
      */
     public function destroy(string $id)
     {
-        $app= App::findOrFail($id);
-        $app->delete();
+        $transfer= Transfer::findOrFail($id);
+        $transfer->delete();
         return back()->with('message', 'تم الحذف  بنجاح');
     }
 }
