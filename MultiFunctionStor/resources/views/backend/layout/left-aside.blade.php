@@ -55,34 +55,71 @@
                                          
                                     <li><a href="/app-sections">قسم  التطبيقات</a>
                                     </li>    
-                                    <li><a href="">قسم الألعاب</a></li>
-                                    <li><a href="/transfer-money-firm/">قسم شركات الشحن</a></li>
-                                   
-                                    <li><a href="/game-section">قسم الألعاب</a>
-                               
+                                    <li><a href="#">قسم الألعاب</a>
+                                     <ul>
+                                      <li><a href="/game-section">الأقسام</a></li>
+                                      <li><a href="/game">الألعاب</a></li>
+                                      <li><a href="/game-order">طلبات الألعاب</a></li>
+                             
+                                     </ul>
+                                
                                     </li>
-                                                   
-                                     <li><a href="/data">  قسم البيانات والاتصالات</a>
+                                    <li><a href="#">قسم شركات الشحن</a>
+                                      <ul>
+                                         
+                                        <li><a href="/transfer-money-firm">الشركات</a></li>
+                                        <li><a href="/transfer-money-firm-order">الطلبات </a></li>
                                
-                                     </li> 
-                                      <li><a href="/ebank-section">قسم البنوك الرقمية</a>
-                                 
-                                       </li> 
+                                      </ul>
+                                   
+                                
+                                    </li>
 
-                                    <li><a href="/program">خدمة تفيل البرامج</a>
-                                     </li> 
+
+
+                                    <li><a href="#">    قسم البيانات والاتصالات</a>
+                                       <ul>
+                                        
+                                        <li><a href="/data">الشركات</a></li>
+                                        <li><a href="/data-order">الطلبات </a></li>
+                               
+                                      </ul>
+                                    </li>
+                                    <li><a href="/ebank-section">قسم البنوك الرقمية</a>
+                                        <ul>
+                                             <li><a href="/ebank-section">الأقسام</a></li>
+                                             <li><a href="/ebank">البنوك</a></li>
+                                             <li><a href="/ebank-order">طلبات البنوك</a></li>
+                             
+                                       </ul>
+                                    </li> 
+
+                                    <li><a href="#">خدمة تفيل البرامج</a>
+                                      <ul>
+                                        <li><a href="/program">البرامج</a></li>
+                                        <li><a href="/program-order">طلبات تفعيل البرامج</a></li>
+                             
+                                      </ul>
+                                    </li> 
 
                                     <li><a href="/card">  بطاقاتنا</a>
+                                      <ul>
+                                        <li><a href="/card">البطاقات</a></li>
+                                        <li><a href="/card-order">طلبات البطاقات</a></li>
+                               
+                                      </ul>
                                     </li>
-                                    <li><a href="#">قسم البطاقات الرقمية</a>
-                                    </li> 
-                                      <!--      <li><a href="/turkification/">التتريك</a></li>
-                                    
-                                    <li><a href="/app-order/">طلبات قسم الألعاب</a></li>
-                                    <li><a href="/transfer-money-firm-order/">طلبات قسم شركات الشحن</a></li>
-                                    
-                              
-                                        -->
+                                    <li><a href="/card">  قسم البطاقات الرقمية</a>
+                                       <ul>
+                                        
+                                        <li><a href="/ecard-section">أنواع البطاقات</a></li>
+                                        <li><a href="/ecard">البطاقات</a></li>
+                                        <li><a href="/ecard-order">طلبات البطاقات</a></li>
+                               
+                                      </ul>
+                                    </li>
+                                    <li><a href="/turkification-order">طلبات التتريك  </a></li>
+                                
                               
                                 </ul>
                             </li>

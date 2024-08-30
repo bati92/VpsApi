@@ -11,25 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_order', function (Blueprint $table) {
+        Schema::create('ecard_order', function (Blueprint $table) {
             $table->id();
-            $table->integer('data_id');
+            $table->integer('ecard_id');
             $table->integer('user_id');
-            $table->foreign('data_id')->references('id')->on('datas')->onDelete('cascade');
+            $table->foreign('ecard_id')->references('id')->on('ecards')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('price');
-            $table->string('mobile');
-            $table->integer('count');
-            $table->string('note');
+            $table->integer('count')->nullable();
+            $table->integer('price');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     */
+     */ 
     public function down(): void
     {
-        Schema::dropIfExists('data_order');
+        Schema::dropIfExists('ecard_order');
     }
 };

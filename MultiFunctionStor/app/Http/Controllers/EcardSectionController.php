@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EbankSection;
-use App\Models\Ebank;
-use Illuminate\Support\Facades\DB;
 
-class EbankController extends Controller
+use App\Models\EcardSection;
+use Illuminate\Support\Facades\DB;
+class EcardSectionController extends Controller
 {
+    
+    
     public function index()
     { 
-        $ebanks=DB::table('ebanks')->select('*')->orderBy('id', 'desc')->paginate(500);
-        
-        $ebanks_sections=DB::table('ebank_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
-        return view('backend.ebanks.index', compact('ebanks','ebanks_sections'));
+        $ecards=DB::table('ecard_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
+        return view('backend.ecardSection.index', compact('ecards'));
     }
 
     /**
@@ -32,11 +31,11 @@ class EbankController extends Controller
     {
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'ebank'.time().$file->getClientOriginalName();
-            $file->move('assets/images/ebanks/', $name);
+            $name = 'ecard'.time().$file->getClientOriginalName();
+            $file->move('assets/images/ecardSection/', $name);
             $input['image'] = $name;
          }
-        Ebank::create($input);
+        EcardSection::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
@@ -61,17 +60,16 @@ class EbankController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $e = Ebank::findOrFail($id);
+        $e = EcardSection::findOrFail($id);
         $input = $request->all();
         if ($file = $request->file('image')) {
-            $name = 'ebank'.time().$file->getClientOriginalName();
-            $file->move('assets/images/ebanks/', $name);
+            $name = 'ecard'.time().$file->getClientOriginalName();
+            $file->move('assets/images/ecardSection/', $name);
             $input['image'] = $name;
         }
         $e->update([
         'name' => $input['name'],
         'image' => $input['image'],
-        'bank_id' => $input['bank_id'],
         
         ]);
        
@@ -83,9 +81,10 @@ class EbankController extends Controller
      */
     public function destroy(string $id)
     {
-        $e= Ebank::findOrFail($id);
+        $e= EcardSection::findOrFail($id);
         $e->delete();
         return back()->with('message', 'تم الحذف  بنجاح');
     }
+
 
 }

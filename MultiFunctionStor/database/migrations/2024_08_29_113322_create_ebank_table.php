@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->string('bank_id');
+            $table->integer('bank_id');
             $table->foreign('bank_id')->references('id')->on('ebank_sections')->onDelete('cascade');
             $table->timestamps();
         });

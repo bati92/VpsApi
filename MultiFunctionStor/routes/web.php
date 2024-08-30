@@ -41,6 +41,10 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\DataController;
 
 
+use App\Http\Controllers\EcardSectionController;
+use App\Http\Controllers\EcardOrderController;
+use App\Http\Controllers\EcardController;
+
 Route::get('/', function () {
     return view('backend.dashboard');});
 
@@ -60,6 +64,8 @@ Route::resource( 'vip' , VipController::class,);
 
 Route::resource('turkification' , TurkificationController::class,);
 
+Route::resource('turkification-order' , TurkificationController::class,);
+
 
 
 Route::resource( 'transfer-money-firm' , TransferMoneyFirmController::class,);
@@ -71,6 +77,11 @@ Route::resource('transfer-money-firm-order' , TransferMoneyFirmOrderController::
 Route::resource('game' , GameController::class,);
 Route::resource('game-section' , GameSectionController::class,);
 Route::resource('game-order' , GameOrderController::class,);
+
+
+Route::resource('ecard' , EcardController::class,);
+Route::resource('ecard-section' , EcardSectionController::class,);
+Route::resource('ecard-order' , EcardOrderController::class,);
 
 
 Route::resource('ebank' , EbankController::class,);
