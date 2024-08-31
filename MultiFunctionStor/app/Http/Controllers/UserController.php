@@ -24,11 +24,18 @@ class UserController extends Controller
     {
     
         $input = $request->all();
+        if($request->file('image')!="")
+        {
         if ($file = $request->file('image')) {
            $name = 'user'.time().$file->getClientOriginalName();
            $file->move('images/users/', $name);
            $input['image'] = $name;
         }
+       }
+       else{
+        $input['image']="";
+       }
+       $input['mobile']= $input['code']. $input['mobile'];
         User::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');        
     }
@@ -54,21 +61,23 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $input = $request->all();
+        if($request->file('image')!="")
+        {
+      
         if ($file = $request->file('image')) {
             $name = 'user_'.time().$file->getClientOriginalName();
             $file->move('images/users/', $name);
             $input['image'] = $name;
         }
-        $user->update([
-           'name' => $input['name'],
-           'last_name' => $input['last_name'],
-           'password' => bcrypt($input['password']),
-           'first_name' => $input['first_name'],
-           'mobile' => $input['mobile'],
-           'role' => $input['role'],
-           'email' => $input['email'],
-           'image' => $input['image'],
-        ]);
+       }
+       else
+       {
+        $input['image'] =$user['image'];
+       }
+       $input['password'] = bcrypt($input['password']);
+        $user->update(
+          $input
+        );
         
         return back()->with('message', 'تم التعديل بنجاح');
     }

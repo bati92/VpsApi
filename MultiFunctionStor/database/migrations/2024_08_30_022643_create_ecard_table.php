@@ -16,7 +16,8 @@ return new class extends Migration
             
             $table->string('name');
             $table->string('image');
-            
+            $table->integer('price');
+            $table->string('note')->nullable();
             $table->integer('ecard_id');
             $table->foreign('ecard_id')->references('id')->on('ecard_sections')->onDelete('cascade');
             $table->timestamps();

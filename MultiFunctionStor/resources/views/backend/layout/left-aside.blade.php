@@ -14,20 +14,7 @@
                     </ul>
                 </div>
                 <hr>
-                <ul class="row list-unstyled">
-                    <li class="col-4">
-                        <small>عدد العملاء </small>
-                        <h6>561</h6>
-                    </li>
-                    <li class="col-4">
-                        <small>عدد الوكلاء </small>
-                        <h6>920</h6>
-                    </li>
-                    <li class="col-4">
-                        <small>عدد الزبائن</small>
-                        <h6>500</h6>
-                    </li>
-                </ul>
+        
             </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
@@ -40,20 +27,16 @@
                 <div class="tab-pane active" id="menu">
                     <nav id="left-sidebar-nav" class="sidebar-nav">
                         <ul id="main-menu" class="metismenu li_animation_delay">
-                            <li class="active">
-                                <a href="#Dashboard" class="has-arrow"><i class="fa icon-users"></i><span>العملاء</span></a>
-                                <ul>
-                                    <li><a href="/users/2/category">الوكلاء</a></li>
-                                    <li><a href="/users/3/category">أصحاب المحلات</a></li>
-                                    <li><a href="/users/4/category">زبون عادي</a></li>
-                                    <li><a href="/vip/">أنواع العملاء</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#App" class="has-arrow"><i class="fa fa-th-large"></i><span>الخدمات</span></a>
-                                <ul>
+                            <li class="active">       <a href="#App" class="has-arrow"><i class="fa fa-th-large"></i><span>الخدمات</span></a>
+                                      <ul>
                                          
-                                    <li><a href="/app-sections">قسم  التطبيقات</a>
+                                    <li><a href="#">قسم  التطبيقات</a>
+                                    <ul>
+                                      <li><a href="/app-section">الأقسام</a></li>
+                                      <li><a href="/app">التطبيقات</a></li>
+                                      <li><a href="/app-order">طلبات الشحن</a></li>
+                             
+                                     </ul>
                                     </li>    
                                     <li><a href="#">قسم الألعاب</a>
                                      <ul>
@@ -62,7 +45,6 @@
                                       <li><a href="/game-order">طلبات الألعاب</a></li>
                              
                                      </ul>
-                                
                                     </li>
                                     <li><a href="#">قسم شركات الشحن</a>
                                       <ul>
@@ -74,9 +56,6 @@
                                    
                                 
                                     </li>
-
-
-
                                     <li><a href="#">    قسم البيانات والاتصالات</a>
                                        <ul>
                                         
@@ -121,8 +100,18 @@
                                     <li><a href="/turkification-order">طلبات التتريك  </a></li>
                                 
                               
+                                  </ul>
+                            </li>
+                            <li >
+                                <a href="#Dashboard" class="has-arrow"><i class="fa icon-users"></i><span>العملاء</span></a>
+                                <ul>
+                                    <li><a href="/users/2/category">الوكلاء</a></li>
+                                    <li><a href="/users/3/category">أصحاب المحلات</a></li>
+                                    <li><a href="/users/4/category">زبون عادي</a></li>
+                                    <li><a href="/vip/">أنواع العملاء</a></li>
                                 </ul>
                             </li>
+                  
                     
                             <li>
                                 <a href="/users/1/category" class=""><i class="fa fa-user"></i><span>المستخدمين</span></a>

@@ -30,11 +30,19 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'game'.time().$file->getClientOriginalName();
-            $file->move('assets/images/game/', $name);
-            $input['image'] = $name;
-         }
+       
+         if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'game'.time().$file->getClientOriginalName();
+                $file->move('assets/images/game/', $name);
+                $input['image'] = $name;
+             }
+        }
+        else
+        {
+         $input['image']= "";
+        }
         Game::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -62,17 +70,19 @@ class GameController extends Controller
     {
         $game = Game::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'game'.time().$file->getClientOriginalName();
-            $file->move('assets/images/game/', $name);
-            $input['image'] = $name;
-        }
-        $game->update([
-        'name' => $input['name'],
-        'game_id' => $input['game_id'],
-        'image' => $input['image'],
-        
-        ]);
+        if($request->file('image')!="")
+        {
+           if ($file = $request->file('image')) {
+               $name = 'game'.time().$file->getClientOriginalName();
+               $file->move('assets/images/game/', $name);
+               $input['image'] = $name;
+            }
+       }
+       else
+       {
+        $input['image']= $game['image'];
+       }
+        $game->update( $input);
        
         return back()->with('message', 'تم التعديل بنجاح');
     }

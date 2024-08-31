@@ -18,12 +18,12 @@
         @endif
         <div class="block-header">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Project Board</h2>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>قسم البيانات والاتصالات</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-dashboard"></i></a></li>                            
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Project Board</li>
+                        <li class="breadcrumb-item">لوحة التحكم</li>
+                        <li class="breadcrumb-item active"> البيانات والاتصالات</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -49,7 +49,8 @@
                                         <tr>                                            
                                             <th>اسم  الشركة</th>
                                             <th> الصورة </th>
-                                            <th> النوع </th>
+                                            <th> النوع </th> 
+                                            <th> السعر </th>
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
@@ -75,6 +76,9 @@
                                           
                                                 </h6>
                                              </td>
+                                             <td class="project-title">
+                                                <h6>{{$data->price}}</h6>
+                                            </td>
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
@@ -115,7 +119,16 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
-               
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="السعر"  name="price" aria-label="price" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">الوصف</span>
+                        </div>
+                                <textarea class="form-control"  name="note"   ></textarea>
+                    </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">الصورة</span>
@@ -191,6 +204,16 @@
                       </select> 
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" value="{{$data->name}}" required placeholder="الاسم" name="name" aria-label="name" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="السعر"  value="{{$data->price}}"   name="price" aria-label="price" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">الوصف</span>
+                        </div>
+                                <textarea class="form-control"  name="note"   > value="{{$data->name}}" </textarea>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

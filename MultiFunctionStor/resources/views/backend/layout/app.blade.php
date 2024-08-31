@@ -24,6 +24,9 @@
     --secondary-color:#e0455a;
     --primary-gradient: linear-gradient(45deg, #34c2b1, #e0455a);
     }
+    body{
+        font-size:16px !important
+    }
 
     </style>
 <!-- MAIN CSS -->
@@ -47,26 +50,11 @@ body.font-nunito {
 @include('backend.layout.header')
 
 @include('backend.layout.left-aside')
-<!--
-@include('backend.layout.right-aside')
--->
+
 
 
 
 @yield('content')
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- Javascript -->

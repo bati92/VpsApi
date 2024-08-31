@@ -12,6 +12,8 @@ class Ecard extends Model
         'ecard_id',
         'name',
         'image',
+        'price',
+        'note',
     ];
     
     /**

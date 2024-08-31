@@ -30,11 +30,20 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'data'.time().$file->getClientOriginalName();
-            $file->move('assets/images/data/', $name);
-            $input['image'] = $name;
-         }
+      
+         if($request->file('image')!="")
+         {
+             if ($file = $request->file('image')) {
+                 $name = 'data'.time().$file->getClientOriginalName();
+                 $file->move('assets/images/data/', $name);
+                 $input['image'] = $name;
+             } 
+        }
+        else
+        {
+         $input['image'] ="";
+        }
+         
         Data::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -62,17 +71,21 @@ class DataController extends Controller
     {
         $data = Data::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'data'.time().$file->getClientOriginalName();
-            $file->move('assets/images/data/', $name);
-            $input['image'] = $name;
-        }
-        $data->update([
-        'name' => $input['name'],
-        'image' => $input['image'],
-        'type' => $input['type'],
-        
-        ]);
+       
+        if($request->file('image')!="")
+        {
+            if ($file = $request->file('image')) {
+                $name = 'data'.time().$file->getClientOriginalName();
+                $file->move('assets/images/data/', $name);
+                $input['image'] = $name;
+            } 
+       }
+       else
+       {
+        $input['image'] =$data['image'];
+       }
+        $data->update(
+        $input);
        
         return back()->with('message', 'تم التعديل بنجاح');
     }

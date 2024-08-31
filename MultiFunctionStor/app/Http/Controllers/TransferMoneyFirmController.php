@@ -24,11 +24,19 @@ class TransferMoneyFirmController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('assets/images/TransferMoneyFirm/', $name);
-            $input['image'] = $name;
-         }
+       
+         if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'app'.time().$file->getClientOriginalName();
+                $file->move('assets/images/TransferMoneyFirm/', $name);
+                $input['image'] = $name;
+             }
+        }
+        else
+        {
+         $input['image']= "";
+        }
         TransferMoneyFirm::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -45,20 +53,19 @@ class TransferMoneyFirmController extends Controller
     {
         $transferMoneyFirm = TransferMoneyFirm::findOrFail($id);
         $input = $request->all();
-        $input = $request->all();
-
-        if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('assets/images/TransferMoneyFirm/', $name);
-            $input['image'] = $name;
-         }
-        $transferMoneyFirm->update([
-           'name' => $input['name'],
-           'iban' => $input['iban'],
-           'account_name' => $input['account_name'],
-           
-           'image' => $input['image'],
-        ]);
+        if($request->file('image')!="")
+        {
+           if ($file = $request->file('image')) {
+               $name = 'app'.time().$file->getClientOriginalName();
+               $file->move('assets/images/TransferMoneyFirm/', $name);
+               $input['image'] = $name;
+            }
+       }
+       else
+       {
+        $input['image']= $transferMoneyFirm['image'];
+       }
+        $transferMoneyFirm->update($input);
         
         return back()->with('message', 'تم التعديل بنجاح');
     }

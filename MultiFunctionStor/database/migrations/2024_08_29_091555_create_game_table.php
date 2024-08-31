@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('game_id');
             $table->foreign('game_id')->references('id')->on('game_sections')->onDelete('cascade');
+            $table->integer('price');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

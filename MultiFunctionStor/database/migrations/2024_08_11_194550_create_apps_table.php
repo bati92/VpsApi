@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('player_no')->nullable();
             $table->integer('price');
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

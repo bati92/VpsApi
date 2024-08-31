@@ -31,11 +31,19 @@ class EcardController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
+       
+         if($request->file('image')!="")
+         {
+             if ($file = $request->file('image')) {
             $name = 'ecard'.time().$file->getClientOriginalName();
             $file->move('assets/images/ecard/', $name);
             $input['image'] = $name;
          }
+        }
+        else
+        {
+         $input['image']= "";
+        }
         Ecard::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -63,17 +71,19 @@ class EcardController extends Controller
     {
         $e = Ecard::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'ecard'.time().$file->getClientOriginalName();
-            $file->move('assets/images/ecard/', $name);
-            $input['image'] = $name;
+        if($request->file('image')!="")
+        {
+            if ($file = $request->file('image')) {
+           $name = 'ecard'.time().$file->getClientOriginalName();
+           $file->move('assets/images/ecard/', $name);
+           $input['image'] = $name;
         }
-        $e->update([
-        'name' => $input['name'],
-        'image' => $input['image'],
-        'ecard_id' => $input['ecard_id'],
-        
-        ]);
+       }
+       else
+       {
+        $input['image']= $e['image'];
+       }
+        $e->update( $input);
        
         return back()->with('message', 'تم التعديل بنجاح');
     }

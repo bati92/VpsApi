@@ -18,12 +18,12 @@
         @endif
         <div class="block-header">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Project Board</h2>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>قسم البطاقات الرقمية</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-dashboard"></i></a></li>                            
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Project Board</li>
+                        <li class="breadcrumb-item">لوحة التحكم</li>
+                        <li class="breadcrumb-item active"> البطاقات الرقمية</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -50,6 +50,7 @@
                                             <th>اسم  البنك</th>
                                             <th> الصورة </th>
                                             <th> القسم </th>
+                                            <th>السعر</th>
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
@@ -63,6 +64,9 @@
                                         
 
                                             <td><img src="{{asset('assets/images/ecard/'.$ecard->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td class="project-title">
+                                                <h6>{{$data->name}}</h6>
+                                            </td>
                                             <td class="project-title">
                                                 <h6>  
                                                     @foreach ($ecards_sections as $key => $section)
@@ -115,7 +119,16 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
-               
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="السعر"  name="price" aria-label="price" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">الوصف</span>
+                        </div>
+                                <textarea class="form-control"  name="note"    ></textarea>
+                    </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">الصورة</span>
@@ -186,6 +199,16 @@
                     </select> 
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" value="{{$ecard->name}}" required placeholder="الاسم" name="name" aria-label="name" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="السعر"  value="{{$ecard->price}} name="price" aria-label="price" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">الوصف</span>
+                        </div>
+                                <textarea class="form-control"  name="note"    >{{$ecard->price}}</textarea>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

@@ -33,11 +33,21 @@ class AppSectionContoller extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('assets/images/appSection/', $name);
-            $input['image'] = $name;
-         }
+     
+
+         $input = $request->all();
+         if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'app'.time().$file->getClientOriginalName();
+                $file->move('assets/images/appSection/', $name);
+                $input['image'] = $name;
+             }
+        }
+        else
+        {
+         $input['image'] ="";
+        }
         AppSection::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
  
@@ -66,16 +76,21 @@ class AppSectionContoller extends Controller
     {
         $app = AppSection::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'app_'.time().$file->getClientOriginalName();
-            $file->move('images/appSection/', $name);
-            $input['image'] = $name;
-        }
-        $app->update([
-        'name' => $input['name'],
-        'image' => $input['image'],
-       
-        ]);
+      
+        
+        if($request->file('image')!="")
+        {
+            if ($file = $request->file('image')) {
+                $name = 'app_'.time().$file->getClientOriginalName();
+                $file->move('images/appSection/', $name);
+                $input['image'] = $name;
+            }
+       }
+       else
+       {
+        $input['image'] =$app['image'];
+       }
+        $app->update($input);
        
         return back()->with('message', 'تم التعديل بنجاح');
 

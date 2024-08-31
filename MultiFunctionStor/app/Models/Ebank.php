@@ -12,6 +12,9 @@ class Ebank extends Model
         'bank_id',
         'name',
         'image',
+        'note',
+        'price',
+
     ];
     
     /**

@@ -12,6 +12,8 @@ class Game extends Model
         'game_id',
         'name',
         'image',
+        'price',
+        'note',
     ];
     
     /**

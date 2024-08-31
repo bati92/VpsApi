@@ -32,11 +32,19 @@ class AppController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'app'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
-            $input['image'] = $name;
-         }
+        if($request->file('image')!="")
+        {
+            if ($file = $request->file('image')) {
+                $name = 'app'.time().$file->getClientOriginalName();
+                $file->move('images/apps/', $name);
+                $input['image'] = $name;
+             }
+       }
+       else
+       {
+        $input['image'] ="";
+       }
+      
         App::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -62,17 +70,20 @@ class AppController extends Controller
     {
         $app = App::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'app_'.time().$file->getClientOriginalName();
-            $file->move('images/apps/', $name);
-            $input['image'] = $name;
-        }
-        $app->update([
-        'name' => $input['name'],
-        'player_no' => $input['player_no'],
-        'price' => $input['price'],
-        
-        ]);
+      
+        if($request->file('image')!="")
+        {
+            if ($file = $request->file('image')) {
+                $name = 'app_'.time().$file->getClientOriginalName();
+                $file->move('images/apps/', $name);
+                $input['image'] = $name;
+            }
+       }
+       else
+       {
+        $input['image'] =$app['image'];
+       }
+        $app->update( $input);
        
         return back()->with('message', 'تم التعديل بنجاح');
 

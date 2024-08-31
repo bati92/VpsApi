@@ -34,6 +34,10 @@ use App\Http\Controllers\EbankController;
 use App\Http\Controllers\EbankSectionController;
 use App\Http\Controllers\EbankOrderController;
 
+use App\Http\Controllers\TransferController;
+use App\Http\Controllers\TransferOrderController;
+
+
 use App\Http\Controllers\ProgramController;
 
 use App\Http\Controllers\CardController;
@@ -70,6 +74,10 @@ Route::resource('turkification-order' , TurkificationController::class,);
 
 Route::resource( 'transfer-money-firm' , TransferMoneyFirmController::class,);
 Route::resource('transfer-money-firm-order' , TransferMoneyFirmOrderController::class,);
+
+
+Route::resource( 'transfer' , TransferController::class,);
+Route::resource('transfer-order' , TransferOrderController::class,);
 
  
 

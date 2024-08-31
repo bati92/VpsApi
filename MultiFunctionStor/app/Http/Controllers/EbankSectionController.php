@@ -29,11 +29,20 @@ class EbankSectionController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'ebank'.time().$file->getClientOriginalName();
-            $file->move('assets/images/ebankSection/', $name);
-            $input['image'] = $name;
-         }
+       
+
+         if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'ebank'.time().$file->getClientOriginalName();
+                $file->move('assets/images/ebankSection/', $name);
+                $input['image'] = $name;
+             }
+        }
+        else
+        {
+         $input['image']= "";
+        }
         EbankSection::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -61,16 +70,19 @@ class EbankSectionController extends Controller
     {
         $e = EbankSection::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'ebank'.time().$file->getClientOriginalName();
-            $file->move('assets/images/ebankSection/', $name);
-            $input['image'] = $name;
-        }
-        $e->update([
-        'name' => $input['name'],
-        'image' => $input['image'],
-        
-        ]);
+        if($request->file('image')!="")
+        {
+           if ($file = $request->file('image')) {
+               $name = 'ebank'.time().$file->getClientOriginalName();
+               $file->move('assets/images/ebankSection/', $name);
+               $input['image'] = $name;
+            }
+       }
+       else
+       {
+        $input['image']=$e['image'];
+       }
+        $e->update( $input);
        
         return back()->with('message', 'تم التعديل بنجاح');
     }

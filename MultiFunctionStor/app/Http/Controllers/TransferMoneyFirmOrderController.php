@@ -43,15 +43,7 @@ class TransferMoneyFirmOrderController extends Controller
         $transferMoneyFirmOrder = TransferMoneyFirmOrder::findOrFail($id);
         $input = $request->all();
         
-        $transferMoneyFirmOrder->update([
-           'transfer_money_firm_id' => $input['transfer_money_firm_id'],
-           'user_id' => $input['user_id'],
-           'sender' => $input['sender'],
-           'value' => $input['value'],
-           'currency' => $input['currency'],
-           'dekont_no' => $input['dekont_no'],
-           'password' => $input['password'],
-        ]);
+        $transferMoneyFirmOrder->update( $input);
         
         return back()->with('message', 'تم التعديل بنجاح');
     }

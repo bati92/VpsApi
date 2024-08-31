@@ -11,6 +11,8 @@ class Transfer extends Model
     protected $fillable = [
         'name',
         'image',
+        'price',
+        'note',
     ];
     
     /**

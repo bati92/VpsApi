@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('ebanks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('bank_id');
             $table->foreign('bank_id')->references('id')->on('ebank_sections')->onDelete('cascade');
+            $table->integer('price');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

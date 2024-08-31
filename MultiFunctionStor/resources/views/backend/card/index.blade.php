@@ -18,12 +18,12 @@
         @endif
         <div class="block-header">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Project Board</h2>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>قسم بطاقاتنا</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-dashboard"></i></a></li>                            
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Project Board</li>
+                        <li class="breadcrumb-item">لوحة التحكم</li>
+                        <li class="breadcrumb-item active"> بطاقاتنا</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -49,7 +49,7 @@
                                         <tr>                                            
                                             <th>اسم  البطاقة</th>
                                             <th> الصورة </th>
-                                         
+                                            <th>  السعر</th>
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
@@ -60,10 +60,10 @@
                                             <td class="project-title">
                                                 <h6>{{$card->name}}</h6>
                                             </td>
-                                        
+                                            
 
                                             <td><img src="{{asset('assets/images/card/'.$card->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
-                                           
+                                             <td> {{$card->price}}</td>
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
@@ -96,7 +96,16 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">
                     </div>
-               
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="السعر"  name="price" aria-label="price" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">الوصف</span>
+                        </div>
+                                <textarea class="form-control"  name="note"   ></textarea>
+                    </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">الصورة</span>
@@ -156,6 +165,16 @@
 
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" value="{{$card->name}}" required placeholder="الاسم" name="name" aria-label="name" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" required placeholder="السعر"  value="{{$card->price}}"   name="price" aria-label="price" aria-describedby="basic-addon2">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">الوصف</span>
+                        </div>
+                                <textarea class="form-control"  name="note"   > value="{{$card->note}}" </textarea>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

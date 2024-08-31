@@ -30,11 +30,20 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'program'.time().$file->getClientOriginalName();
-            $file->move('assets/images/program/', $name);
-            $input['image'] = $name;
-         }
+      
+         
+         if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'program'.time().$file->getClientOriginalName();
+                $file->move('assets/images/program/', $name);
+                $input['image'] = $name;
+             }
+        }
+        else
+        {
+         $input['image']= "";
+        }
         Program::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -62,16 +71,19 @@ class ProgramController extends Controller
     {
         $program = Program::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'program'.time().$file->getClientOriginalName();
-            $file->move('assets/images/program/', $name);
-            $input['image'] = $name;
+        if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'program'.time().$file->getClientOriginalName();
+                $file->move('assets/images/program/', $name);
+                $input['image'] = $name;
+             }
         }
-        $program->update([
-        'name' => $input['name'],
-        'image' => $input['image'],
-        
-        ]);
+        else
+        {
+         $input['image']= $program['image'];
+        }
+        $program->update($input);
        
         return back()->with('message', 'تم التعديل بنجاح');
     }

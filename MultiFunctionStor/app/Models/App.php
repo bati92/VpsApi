@@ -21,7 +21,9 @@ class App extends Model
         'name',
         'player_no',
         'price',
+        'note',
         'image',
+        'note',
     ];
     
     public function users(): BelongsToMany

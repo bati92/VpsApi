@@ -11,6 +11,8 @@ class Data extends Model
     protected $fillable = [
         'name',
         'image',
+        'price',
+        'note',
         'type',//فاتورة   1 :   ---   -2:رصيد
     ];
     

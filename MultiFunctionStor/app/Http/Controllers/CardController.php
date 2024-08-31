@@ -30,11 +30,19 @@ class CardController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if ($file = $request->file('image')) {
-            $name = 'card'.time().$file->getClientOriginalName();
-            $file->move('assets/images/card/', $name);
-            $input['image'] = $name;
-         }
+      
+         if($request->file('image')!="")
+         {
+            if ($file = $request->file('image')) {
+                $name = 'card'.time().$file->getClientOriginalName();
+                $file->move('assets/images/card/', $name);
+                $input['image'] = $name;
+             }   
+        }
+        else
+        {
+         $input['image'] ="";
+        }
         Card::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -61,17 +69,23 @@ class CardController extends Controller
     public function update(Request $request, string $id)
     {
         $card = Card::findOrFail($id);
+      
         $input = $request->all();
+
+        if($request->file('image')!="")
+        {
         if ($file = $request->file('image')) {
             $name = 'card'.time().$file->getClientOriginalName();
             $file->move('assets/images/card/', $name);
             $input['image'] = $name;
-        }
-        $card->update([
-        'name' => $input['name'],
-        'image' => $input['image'],
-        
-        ]);
+        }  $input['image'] = $name;
+            
+       }
+       else
+       {
+        $input['image'] =$card['image'];
+       }
+        $card->update( $input   );
        
         return back()->with('message', 'تم التعديل بنجاح');
     }

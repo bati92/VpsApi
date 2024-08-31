@@ -23,7 +23,7 @@ return new class extends Migration
            
             $table->integer('vip_id')->nullable();
             $table->foreign('vip_id')->references('id')->on('vips')->onDelete('cascade');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
