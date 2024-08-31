@@ -108,10 +108,13 @@
             <div class="modal-body"> 
                 <form method="Post" action="{{ route('game.store') }}" enctype="multipart/form-data">
                 <div class="input-group mb-3">
-             
-                <x-bladewind::select
-    name="country"
-    :data="$games_sections" />   
+                       <select class="custom-select" required name="game_id" >
+                       <option value="" selected>اختر القسم</option>
+                           @foreach ($games_sections as $key => $section)
+                            <option value="{{$section->id}}" >{{$section->name}}</option>
+
+                           @endforeach
+                         </select>     
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" required placeholder="الاسم"  name="name" aria-label="name" aria-describedby="basic-addon2">

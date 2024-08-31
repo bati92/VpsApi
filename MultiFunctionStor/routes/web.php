@@ -50,7 +50,7 @@ use App\Http\Controllers\EcardOrderController;
 use App\Http\Controllers\EcardController;
 
 Route::get('/', function () {
-    return view('backend.dashboard');});
+    return view('welcome');});
 
 Route::resource( 'user', UserController::class,);
     
@@ -102,3 +102,6 @@ Route::resource('program' , ProgramController::class,);
 Route::resource('card' , CardController::class,);
 
 Route::resource('data' , DataController::class,);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
