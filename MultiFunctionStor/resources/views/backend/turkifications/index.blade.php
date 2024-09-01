@@ -30,9 +30,7 @@
                     <div class="d-flex flex-row-reverse">
                         <div class="page_action">
                             <a href="javascript:void(0);" data-toggle="modal" class="btn btn-primary" data-target="#createmodal" ><i class="fa fa-add">إضافة طلب التتريك</i></a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal"><i class="fa fa-download"></i> Download report</button>
-                            <button type="button" class="btn btn-secondary"><i class="fa fa-send"></i> Send report</button>
-                        </div>
+                            </div>
                         <div class="p-2 d-flex">
                         </div>
                     </div>

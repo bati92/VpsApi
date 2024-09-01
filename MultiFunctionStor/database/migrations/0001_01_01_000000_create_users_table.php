@@ -25,6 +25,8 @@ return new class extends Migration
             $table->foreign('vip_id')->references('id')->on('vips')->onDelete('cascade');
             $table->string('image')->nullable();
             $table->string('email')->unique();
+            $table->integer('gender')->nullable();//0 is male:1 is female
+            $table->string('nationality')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

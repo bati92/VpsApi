@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->integer('price');
             $table->string('note')->nullable();
-            $table->string('type');
+            $table->string('type');//1:فاتورة ----2:رصيد ----3----غير مصنف 
             $table->timestamps();
         });
     }

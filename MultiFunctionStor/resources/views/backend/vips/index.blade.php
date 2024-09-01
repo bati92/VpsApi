@@ -19,11 +19,11 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Project Board</h2>
+                    <h2>عمولات العملاء</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-dashboard"></i></a></li>                            
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Project Board</li>
+                        <li class="breadcrumb-item">لوحة التحكم</li>
+                        <li class="breadcrumb-item active">عمولات العملاء</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -56,7 +56,10 @@
                                         @foreach ($vips as $key => $vip)
                                         <tr>
                                             <td class="project-title">
-                                                <h6>{{$vip->role_name}}</h6>
+                                                <h6> {{$vip->role_name}}
+                                                    
+                                                
+                                                </h6>
                                             </td>
                                             <td>{{$vip->commession_percent}}</td>
                                             <td class="project-actions">
@@ -87,10 +90,21 @@
             </div>
             <div class="modal-body"> 
                 <form method="Post" action="{{ route('vip.store') }}" enctype="multipart/form-data">
+              
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" required placeholder="نوع العميل"  name="role_name" aria-label="role_name" aria-describedby="basic-addon2">
+                       
+                        <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-edit"> </i></span>
+                        </div>  
+                      
+                        <input type="text" class="form-control" required placeholder=" الاسم"  name="role_name" aria-label="commession_percent" aria-describedby="basic-addon2">
+                      
                     </div>
+                
                     <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-edit"> </i></span>
+                        </div>  
                         <input type="text" class="form-control" required placeholder="نسبة العمولة"  name="commession_percent" aria-label="commession_percent" aria-describedby="basic-addon2">
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -141,10 +155,20 @@
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$vip->role_name}}" required placeholder="نوع العميل"  name="role_name" aria-label="role_name" aria-describedby="basic-addon2">
+                       
+                        <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-edit"> </i></span>
+                        </div>  
+                      
+                        <input type="text" class="form-control" required placeholder=" الاسم"  value="{{$vip->role_name}}" name="role_name" aria-label="commession_percent" aria-describedby="basic-addon2">
+                      
                     </div>
+                
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{$vip->commession_percent}}" required placeholder="نسبة العمولة"  name="commession_percent" aria-label="commession_percent" aria-describedby="basic-addon2">
+                        <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-edit"> </i></span>
+                        </div>  
+                        <input type="text" class="form-control" required placeholder="نسبة العمولة"   value="{{$vip->commession_percent}}"  name="commession_percent" aria-label="commession_percent" aria-describedby="basic-addon2">
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                

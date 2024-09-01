@@ -33,6 +33,8 @@ class User extends Authenticatable
         'vip_id',
         'image',
         'email',
+        'gender',
+        'nationality',
         'email_verified_at',
         'password',
     ];

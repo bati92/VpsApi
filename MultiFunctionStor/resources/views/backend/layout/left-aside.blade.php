@@ -4,15 +4,25 @@
         <div class="sidebar-scroll">
             <div class="user-account">
                 <img src="{{URL::asset('/assets/images/user.png')}}" class="rounded-circle user-photo" alt="User Profile Picture">
+                @auth
                 <div class="dropdown">
-                    <span>Welcome,</span>
-                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Pamela Petrus</strong></a>
+                    <span>مرحبا,</span>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ Auth::user()->first_name }}{{ Auth::user()->last_name }}({{ Auth::user()->name }})</strong></a>
                     <ul class="dropdown-menu dropdown-menu-right account">
-                        <li><a href="page-profile2.html"><i class="icon-user"></i>الملف الشخصي</a></li>
+                        <li><a href="/profile"><i class="icon-user"></i>الملف الشخصي</a></li>
                         <li class="divider"></li>
-                        <li><a href="page-login.html"><i class="icon-power"></i>الخروج</a></li>
+                        <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="icon-power"></i>تسجيل الخروج
+                    
+                    
+                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form></li>
                     </ul>
                 </div>
+                @endauth
                 <hr>
         
             </div>

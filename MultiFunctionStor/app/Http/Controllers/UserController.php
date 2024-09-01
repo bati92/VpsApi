@@ -11,8 +11,10 @@ class UserController extends Controller
     public function index()
     { 
         $users=DB::table('users')->select('*')->orderBy('id', 'desc')->paginate(500);
-        //User::all()->paginate(500);
-        return view('backend.users.index', compact('users'));
+        
+        $vips=DB::table('vips')->select('*')->orderBy('id', 'desc')->get();
+      
+        return view('backend.users.index', compact('users','vips'));
     }
 
     public function create()
@@ -48,7 +50,7 @@ class UserController extends Controller
     {
         $users=DB::table('users')->select('*')->where('role',$id)->orderBy('id', 'desc')->paginate(500);
    
-        return view('backend.users.users',compact('users'));
+        return view('backend.users.index',compact('users'));
   
       
     }
