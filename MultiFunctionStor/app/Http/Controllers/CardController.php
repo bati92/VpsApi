@@ -44,6 +44,7 @@ class CardController extends Controller
          $input['image'] ="";
         }
         Card::create($input);
+        
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
