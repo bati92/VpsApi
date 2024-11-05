@@ -1,15 +1,17 @@
-/.phpunit.cache
+
+.phpactor.json
+
 /node_modules
+/vendor
 /public/build
 /public/hot
 /public/storage
 /storage/*.key
 /storage
-/vendor
 .env
 .env.backup
 .env.production
-.phpactor.json
+.phpunit.cache
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -19,5 +21,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-archive.zip
-
