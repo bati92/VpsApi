@@ -12,8 +12,8 @@ return [
     | in web browsers. You are free to adjust these settings as needed.
     |
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
-    */
+    |*/
+    
 
     // Defines which paths should be subject to CORS. In this case, it's the API routes.
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
@@ -23,7 +23,7 @@ return [
 
     // Specifies which origins are allowed to access the resources.
     // You can add multiple origins here or use '*' to allow all origins.
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000'],
 
     // Patterns that match origins to be allowed. Use this if you need more flexible control over the origin.
     'allowed_origins_patterns' => [],
@@ -38,6 +38,8 @@ return [
     'max_age' => 0,
 
     // Allows credentials to be included in cross-origin requests. Set to true if the client-side needs credentials.
-    'supports_credentials' => false,
+    'supports_credentials' => true,
+
+    
 
 ];

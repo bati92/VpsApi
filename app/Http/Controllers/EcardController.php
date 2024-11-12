@@ -12,8 +12,8 @@ class EcardController extends Controller
     public function index()
     { 
         $ecards=DB::table('ecards')->select('*')->orderBy('id', 'desc')->paginate(500);
-        $ecardsSections=DB::table('ecard_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
-        return view('backend.ecard.ecards.index', compact('ecards','ecardsSections'));
+        $ecardSections=DB::table('ecard_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
+        return view('backend.ecard.ecards.index', compact('ecards','ecardSections'));
     }
 
     public function store(Request $request)

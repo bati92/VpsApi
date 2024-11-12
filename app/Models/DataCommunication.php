@@ -17,11 +17,16 @@ class DataCommunication extends Model
         'price',
         'note',
         'status',
-        'type',//فاتورة   1 :   ---   -2:رصيد
+        'section_id',
     ];
     
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'data_communication_orders', 'data_id', 'user_id');
     }
+    public function dataCommunicationSection(): BelongsTo
+    {
+        return $this->belongsTo(DataCommunicationSection::class, 'section_id');
+    }
 }
+ 

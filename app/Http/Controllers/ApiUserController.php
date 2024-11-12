@@ -52,9 +52,13 @@ class ApiUserController extends Controller
 
        $input = $request->all();
        if($type=='A')
-              $input['role'] =2;
+            { $input['role'] =2;
+              $input['vip_id'] =1;
+            }
        else  if($type=='B')
-              $input['role'] =3;
+       {    $input['role'] =3;
+            $input['vip_id'] =2;
+      }
        else   $input['role'] =4;
 
        $input['mobile'] = $input['code'] . $input['mobile'];
@@ -70,7 +74,7 @@ class ApiUserController extends Controller
       
        if (auth()->check()) {
       
-        return response()->json(['authenticated' => true], 200);
+        return response()->json(['authenticated' => true ,'auth'=>Auth::user()], 200);
        }
       return response()->json(['authenticated' => false], 200);
   

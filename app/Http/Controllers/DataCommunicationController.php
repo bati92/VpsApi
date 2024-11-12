@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataCommunication;
+use App\Models\DataCommunicationSection;
 use Illuminate\Support\Facades\DB;
 
 class DataCommunicationController extends Controller
@@ -12,7 +13,18 @@ class DataCommunicationController extends Controller
     public function index()
     { 
         $datas=DB::table('data_communications')->select('*')->orderBy('id', 'desc')->paginate(500);
-        return view('backend.data.datas.index', compact('datas'));
+        $datCommunicationSections=DB::table('data_communication_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
+    
+        return view('backend.data.datas.index', compact('datas','datCommunicationSections'));
+
+        
+    } 
+    public function showData($id)
+    {
+        $datas=DB::table('data_communications')->select('*')->where('section_id',$id)->orderBy('id', 'desc')->paginate(500);
+   
+        $datCommunicationSections=DB::table('data_communication_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
+        return view('backend.data.datas.index',compact('datas','datCommunicationSections'));
     }
 
     public function store(Request $request)

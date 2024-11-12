@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AppSectionContoller;
 use App\Http\Controllers\AppOrderController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardOrderController;
 
 use App\Http\Controllers\DataCommunicationController;
+use App\Http\Controllers\DataCommunicationSectionController;
 use App\Http\Controllers\DataCommunicationOrderController;
 
 use App\Http\Controllers\EbankController;
@@ -49,7 +50,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Http\Middleware\LoadSettings;
 use App\Mail\EbankEmail;
-
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -66,6 +67,9 @@ Route::middleware([LoadSettings::class])->group(function () {
 
 Route::group(['middleware'=> 'auth'], function(){
 
+ 
+
+    Route::get('/admin/unread-notifications', [NotificationController::class, 'getUnreadNotifications'])->name('unread.notifications');
     Route::get('/dashboard', [AllServicesTotalController::class, 'index']);
     
     Route::get('/', [AllServicesTotalController::class, 'index']);
@@ -90,16 +94,28 @@ Route::group(['middleware'=> 'auth'], function(){
     Route::post('/card/{id}/status' , [CardController::class,'changeStatus']);
     Route::resource('card-order' , CardOrderController::class);
     
+    Route::get('card-order/reject/{id}',[ CardOrderController::class,'reject']);
+    Route::get('card-order/accept/{id}',[ CardOrderController::class,'accept']);
+    
     Route::resource('data-communication' , DataCommunicationController::class);
+    Route::resource('data-communication-section' , DataCommunicationSectionController::class);
+    Route::get('/data-communication/{id}/category'  ,[ DataCommunicationController::class,'showData']);
     Route::resource('data-communication-order' , DataCommunicationOrderController::class);
     Route::post('/data-communication/{id}/status',[ DataCommunicationController::class,'changeStatus']);
     
+    Route::get('data-communication-order/reject/{id}',[ DataCommunicationOrderController::class,'reject']);
+    Route::get('data-communication-order/accept/{id}',[ DataCommunicationOrderController::class,'accept']);
+
+
     Route::resource('ebank' , EbankController::class);
     Route::resource('ebank-section' , EbankSectionController::class);
     Route::get('/ebank/{id}/category',[ EbankController::class,'showEbanks']);
     Route::resource('ebank-order' , EbankOrderController::class);
     Route::post('/ebank/{id}/status',[ EbankController::class,'changeStatus']);
-    Route::post('/ebank-section/{id}/status',[ EbankSectionController::class,'changeStatus']);
+    Route::post('/ebank-section/{id}/status',[ EbankSectionController::class,'changeStatus']);    
+    Route::get('ebank-order/reject/{id}',[ EbankOrderController::class,'reject']);
+    Route::get('ebank-order/accept/{id}',[ EbankOrderController::class,'accept']);
+
 
     Route::resource('ecard' , EcardController::class);
     Route::resource('ecard-section' , EcardSectionController::class);
@@ -107,7 +123,8 @@ Route::group(['middleware'=> 'auth'], function(){
     Route::resource('ecard-order' , EcardOrderController::class);
     Route::post('/ecard-section/{id}/status',[ EcardSectionController::class,'changeStatus']);
     Route::post('/ecard/{id}/status',[ EcardController::class,'changeStatus']);
-
+    Route::get('ecard-order/reject/{id}',[ EcardOrderController::class,'reject']);
+    Route::get('ecard-order/accept/{id}',[ EcardOrderController::class,'accept']);
 
     Route::resource('game' , GameController::class);
     Route::resource('game-section' , GameSectionController::class);
@@ -116,24 +133,41 @@ Route::group(['middleware'=> 'auth'], function(){
     Route::post('/game-section/{id}/status',[ GameSectionController::class,'changeStatus']);
     Route::post('/game/{id}/status',[ GameController::class,'changeStatus']);
 
+    Route::get('game-order/reject/{id}',[ GameOrderController::class,'reject']);
+    Route::get('game-order/accept/{id}',[ GameOrderController::class,'accept']);
 
     
     Route::resource('program' , ProgramController::class);
     Route::post('/program/{id}/status',[ProgramController::class,'changeStatus']);
     Route::resource('program-order' , ProgramOrderController::class);
     
+    Route::get('program-order/reject/{id}',[ ProgramOrderController::class,'reject']);
+    Route::get('program-order/accept/{id}',[ ProgramOrderController::class,'accept']);
+
     Route::resource('slider', SliderController::class);
 
     Route::resource('transfer-money-firm' , TransferMoneyFirmController::class);
     Route::post('/transfer-money-firm/{id}/status',[TransferMoneyFirmController::class,'changeStatus']);
     Route::resource('transfer-money-firm-order' , TransferMoneyFirmOrderController::class);
     
+    Route::get('transfer-money-firm-order/reject/{id}',[ TransferMoneyFirmOrderController::class,'reject']);
+    Route::get('transfer-money-firm-order/accept/{id}',[ TransferMoneyFirmOrderController::class,'accept']);
+
     Route::resource('transfer-order' , TransferOrderController::class);
+    
+    Route::get('transfer-order/reject/{id}',[ TransferOrderController::class,'reject']);
+    Route::get('transfer-order/accept/{id}',[ TransferOrderController::class,'accept']);
     
     Route::resource('turkification-order' , TurkificationOrderController::class);
     
+    Route::get('turkification-order/reject/{id}',[ TurkificationOrderController::class,'reject']);
+    Route::get('turkification-order/accept/{id}',[ TurkificationOrderController::class,'accept']);
+    
     Route::resource('vip', VipController::class,);
-
+    
+    Route::post('/favorites/add', [FavoriteController::class, 'addFavorite']);
+    Route::delete('/favorites/remove', [FavoriteController::class, 'removeFavorite']);
+    Route::get('/favorites', [FavoriteController::class, 'getUserFavorites']);
 }); 
 
 }); 

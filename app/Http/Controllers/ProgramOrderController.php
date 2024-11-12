@@ -26,7 +26,20 @@ class ProgramOrderController extends Controller
         ProgramOrder::create($input);
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
-
+    public function reject( $id)
+    {
+        $order= ProgramOrder::findOrFail($id);
+        $order->status="مرفوض";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
+    public function accept( $id)
+    {
+        $order= ProgramOrder::findOrFail($id);
+        $order->status="مقبول";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
     public function update(Request $request,  $id)
     {
         $programOrder = ProgramOrder::findOrFail($id);

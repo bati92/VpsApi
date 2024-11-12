@@ -26,6 +26,20 @@ class GameOrderController extends Controller
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
+    public function reject( $id)
+    {
+        $order= GameOrder::findOrFail($id);
+        $order->status="مرفوض";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
+    public function accept( $id)
+    {
+        $order= GameOrder::findOrFail($id);
+        $order->status="مقبول";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
     public function update(Request $request,  $id)
     {
         $gameOrder = GameOrder::findOrFail($id);

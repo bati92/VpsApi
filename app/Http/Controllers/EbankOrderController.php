@@ -27,6 +27,20 @@ class EbankOrderController extends Controller
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
+    public function reject( $id)
+    {
+        $order= EbankOrder::findOrFail($id);
+        $order->status="مرفوض";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
+    public function accept( $id)
+    {
+        $order= EbankOrder::findOrFail($id);
+        $order->status="مقبول";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
     public function update(Request $request,  $id)
     {
         $ebankOrder = EbankOrder::findOrFail($id);

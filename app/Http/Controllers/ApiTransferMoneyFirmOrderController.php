@@ -20,7 +20,7 @@ class ApiTransferMoneyFirmOrderController extends Controller
        
         TransferMoneyFirmOrder::create($input);
         
-    return response()->json(['message' => 'تمت الإضافة بنجاح']);
+    return response()->json(['message' => '  جاري العمل على طلبك']);
         
     }
     public function myPayments($id)

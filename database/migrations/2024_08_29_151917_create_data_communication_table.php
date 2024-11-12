@@ -21,7 +21,10 @@ return new class extends Migration
             $table->integer('price');
             $table->string('note')->nullable();
             $table->tinyInteger('status')->default('1');
-            $table->string('type');//1:فاتورة ----2:رصيد ----3----غير مصنف 
+
+        // Add section_id column here
+        $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')->references('id')->on('data_communication_sections')->onDelete('cascade');
             $table->timestamps();
         });
     }

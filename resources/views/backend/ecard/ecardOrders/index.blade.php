@@ -43,6 +43,7 @@
                                             <th>السعر</th>
                                             <th>العدد</th>
                                             <th>الوصف</th>
+                                            <th>الحالة</th>
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
@@ -56,11 +57,22 @@
                                             <td>{{$ecardOrder->price}}</td>
                                             <td>{{$ecardOrder->count}}</td>
                                             <td>{{$ecardOrder->note}}</td>
+                                            <td>{{$ecardOrder->status}}</td>
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$ecardOrder->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
                                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$ecardOrder->id}}" class="btn btn-sm btn-outline-danger" ><i class="icon-trash"></i></a>
-                                            </td>
+                                                @if($ecardOrder->status=='قيد المراجعة')
+                                                <a href="/ecard-order/reject/{{$ecardOrder->id}}" title="رفض الطلب"  class="btn btn-sm btn-danger"><i class="icon-close" style="font-size:19px"></i></a>
+                                                <a href="/ecard-order/accept/{{$ecardOrder->id}}" title="قبول الطلب"  class="btn btn-sm btn-success"><i class="icon-check" style="font-size:19px"></i></a>
+                                               @elseif($ecardOrder->status=='مرفوض')
+                                                    <a href="/ecard-order/accept/{{$ecardOrder->id}}" title="قبول الطلب"  class="btn btn-sm btn-success"><i class="icon-check" style="font-size:19px"></i></a>
+                                            
+                                                @else
+                                                <a href="/ecard-order/reject/{{$ecardOrder->id}}" title="رفض الطلب"  class="btn btn-sm btn-danger"><i class="icon-close" style="font-size:19px"></i></a>
+                                                                                        
+                                                @endif                                           
+                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

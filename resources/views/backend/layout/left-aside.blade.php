@@ -56,17 +56,10 @@
 
                                      </ul>
                                     </li>
-                                    <li><a href="#">قسم شركات الشحن</a>
-                                      <ul>
-
-                                        <li><a href="/transfer-money-firm">الشركات</a></li>
-                                        <li><a href="/transfer-money-firm-order">الطلبات </a></li>
-
-                                      </ul>
-                                      
-                                    </li>
+                                 
                                     <li><a href="#"> قسم البيانات والاتصالات</a>
                                        <ul>
+                                        <li><a href="/data-communication-section"> الاقسام</a> </li>
                                         <li><a href="/data-communication">الشركات</a></li>
                                         <li><a href="/data-communication-order">الطلبات </a></li>
                                       </ul>
@@ -95,19 +88,25 @@
 
                                       </ul>
                                     </li>
-                                    <li><a href="/card">  قسم البطاقات الرقمية</a>
+                                    <li><a href="/ecard">  قسم البطاقات الرقمية</a>
                                        <ul>
 
-                                        <li><a href="/ecard-section">أنواع البطاقات</a></li>
+                                        <li><a href="/ecard-section"> الاقسام</a></li>
                                         <li><a href="/ecard">البطاقات</a></li>
                                         <li><a href="/ecard-order">طلبات البطاقات</a></li>
 
                                       </ul>
                                     </li>
                                     <li><a href="/turkification-order">طلبات التتريك </a></li>
+                                    
+                                    <li><a href="/transfer-order">خدمة نقل الرصيد الى master kontor
+                                    </a></li>
                                   </ul>
                             </li>
-                            <li >
+                          
+                       
+                       
+                             <li >
                                 <a href="#Dashboard" class="has-arrow"><i class="fa icon-users"></i><span>العملاء</span></a>
                                 <ul>
                                     <li><a href="/users/2/category">الوكلاء</a></li>
@@ -116,12 +115,20 @@
                                     <li><a href="/vip/">أنواع العملاء</a></li>
                                 </ul>
                             </li>
+                              <li >
+                                <a href="#Dashboard" class="has-arrow"><i class="fa fa-money"></i><span>اضافة الرصيد</span></a>
+                                <ul>
+                              
+
+                                        <li><a href="/transfer-money-firm">شركات الشحن</a></li>
+                                        <li><a href="/transfer-money-firm-order">طلبات الشحن </a></li>
+
+                                </ul>
+                            </li>
                             <li>
                                 <a href="/users/1/category" class=""><i class="fa fa-user"></i><span>المستخدمين</span></a>
                             </li>
-                            <li>
-                                <a href="#forms" class=""><i class="fa fa-money"></i><span>اضافة رصيد</span></a>
-                            </li>
+                      
                             <li>
                                 <a href="/setting" class=""><i class="fa fa-dashboard"></i><span>الاعدادات</span></a>
                             </li>

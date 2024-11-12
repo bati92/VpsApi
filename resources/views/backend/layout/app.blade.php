@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-<title>{{session('app_name') }}</title>
+<title>ITS</title>
 <!-- <title>@yield('title', )</title> -->
 
 <meta charset="utf-8">
@@ -32,6 +32,11 @@
     .my .input-group-text{
         width:150px;
        text-align:center !important
+    }
+    #notificationsList li {
+        padding:10px;
+        border-bottom:1px solid #e9e9e9
+
     }
 
     </style>
@@ -62,7 +67,32 @@ body.font-nunito {
 
 @yield('content')
 
+<script>
+    // وظيفة لجلب الإشعارات غير المقروءة
+    function fetchNotifications() {
+        fetch('http://localhost:8000/admin/unread-notifications'
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // عرض البيانات في الكونسول لتصحيح الأخطاء
+          
+                let notificationsList = document.getElementById('notificationsList');
+                notificationsList.innerHTML = ""; // تفريغ الإشعارات القديمة
 
+                data.forEach(notification => {
+                    let listItem = document.createElement('li');
+                    listItem.textContent = notification.data.message;
+                    notificationsList.appendChild(listItem);
+                });
+            });
+    }
+
+    // تحديث الإشعارات كل 10 ثواني
+    setInterval(fetchNotifications, 10000);
+
+    // جلب الإشعارات عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', fetchNotifications);
+</script>
     <!-- Javascript -->
 <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>    
 <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>

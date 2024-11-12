@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\TransferMoneyFirmOrder;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class TransferMoneyFirmOrderController extends Controller
@@ -24,6 +25,23 @@ class TransferMoneyFirmOrderController extends Controller
     {
     }
 
+    public function reject( $id)
+    {
+        $order= TransferMoneyFirmOrder::findOrFail($id);
+        $order->status="مرفوض";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
+    public function accept( $id)
+    {    
+        $order= TransferMoneyFirmOrder::findOrFail($id);
+        $user=User::where('id',$order->user_id)->first();
+        $user->balance+=$order->value;
+        $user->save();
+        $order->status="مقبول";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
     public function store(Request $request)
     {
         $input = $request->all();

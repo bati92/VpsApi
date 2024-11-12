@@ -23,6 +23,20 @@ class TurkificationOrderController extends Controller
         return back()->with('message', 'تمت الاضافة بنجاح');
     }
 
+    public function reject( $id)
+    {
+        $order= TurkificationOrder::findOrFail($id);
+        $order->status="مرفوض";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
+    public function accept( $id)
+    {
+        $order= TurkificationOrder::findOrFail($id);
+        $order->status="مقبول";
+        $order->save();
+        return back()->with('message', 'تمت العملية  بنجاح');
+    }
     public function update(Request $request, $id)
     {
         $turkificationOrder = TurkificationOrder::findOrFail($id);
