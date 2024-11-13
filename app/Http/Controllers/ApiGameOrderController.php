@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GameOrder;
+
+use Illuminate\Support\Facades\Auth;
 class ApiGameOrderController extends Controller
 {
     public function store(Request $request)
@@ -12,8 +14,29 @@ class ApiGameOrderController extends Controller
         $input = $request->all();
        
    
-        GameOrder::create($input
-    );
-        return response()->json(['message'=>'تم تسجيل طلبك    ']);
+        $order=GameOrder::create($input);
+    $result=$this->operation($order);
+    return response()->json(['message'=>$result]);
+    }
+
+    public function operation($order)
+    {
+        $user=Auth::user();
+        if($user )
+         {
+            if($user->balance>=$order->price)
+             {
+                $user->balance=$user->balance-$order->price;
+                $user->save();
+                $order->status="مقبول";
+                $order->save();
+                return "تمت عملية الشراء بنجاح";
+
+             }
+             $order->status="مرفوض";
+             $order->save();
+             return "فشل عملية الشراء:الرصيد غير كافي   ";
+         }
+         return "فشل عملية الشراء:الرصيد غير كافي   ";
     }
 }

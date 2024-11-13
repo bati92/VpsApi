@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AppSectionContoller;
 use App\Http\Controllers\AppOrderController;
@@ -165,9 +164,7 @@ Route::group(['middleware'=> 'auth'], function(){
     
     Route::resource('vip', VipController::class,);
     
-    Route::post('/favorites/add', [FavoriteController::class, 'addFavorite']);
-    Route::delete('/favorites/remove', [FavoriteController::class, 'removeFavorite']);
-    Route::get('/favorites', [FavoriteController::class, 'getUserFavorites']);
+
 }); 
 
 }); 

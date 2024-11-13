@@ -30,18 +30,47 @@ class ApiUserController extends Controller
         return response()->json(['agents'=> $agents]);  
 
     }
-
     public function store(Request $request)
-    {   
-       $input = $request->all();
-       $input['mobile'] = $input['code'] . $input['mobile'];
-       $input['password'] = bcrypt($input['password']);
-
-      $user=  User::create($input);
-       Mail::to($input['email'])->send(new LoginEbank());
-       return response()->json(['message'=>'تمت إضافة المستخدم بنجاح ']);
-   
+    {
+        try {
+            $request->validate([
+                'name' => ['required', 'string', 'unique:users', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ], [
+                'name.required' => 'الاسم مطلوب.',
+                'name.string' => 'يجب أن يكون الاسم نصاً.',
+                'name.unique' => 'الاسم مستخدم بالفعل، يرجى اختيار اسم آخر.',
+                'name.max' => 'يجب ألا يزيد طول الاسم عن 255 حرفًا.',
+                'email.required' => 'البريد الإلكتروني مطلوب.',
+                'email.string' => 'يجب أن يكون البريد الإلكتروني نصًا.',
+                'email.email' => 'يرجى إدخال عنوان بريد إلكتروني صالح.',
+                'email.max' => 'يجب ألا يزيد طول البريد الإلكتروني عن 255 حرفًا.',
+                'email.unique' => 'البريد الإلكتروني مستخدم بالفعل، يرجى اختيار بريد آخر.',
+                'password.required' => 'كلمة المرور مطلوبة.',
+                'password.string' => 'يجب أن تكون كلمة المرور نصية.',
+                'password.min' => 'يجب ألا تقل كلمة المرور عن 8 أحرف.',
+                'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+            ]);
+    
+            // إنشاء المستخدم
+            $input = $request->all();
+            $input['mobile'] = $input['code'] . $input['mobile'];
+            $input['password'] = bcrypt($input['password']);
+            $user = User::create($input);
+    
+            // إرسال بريد إلكتروني
+          //  Mail::to($input['email'])->send(new LoginEbank());
+    
+            return response()->json(['message' => 'تمت إضافة المستخدم بنجاح']);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $e->errors(),
+            ], 422);
+        }
     }
+    
     
     public function storeAgent(Request $request,$aget)
     {   //return   $aget;

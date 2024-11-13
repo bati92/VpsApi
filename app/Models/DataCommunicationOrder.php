@@ -10,7 +10,7 @@ class DataCommunicationOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'data_id',
+        'data_communication_id',
         'user_id',
         'price',
         'count',

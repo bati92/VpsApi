@@ -51,5 +51,19 @@ class FavoriteController extends Controller
         $favorites = Auth::user()->favorites;
         return response()->json(['favorites' => $favorites]);
     }
+    public function isFavorite(Request $request)
+{
+    $request->validate([
+        'item_id' => 'required|integer',
+        'item_type' => 'required|string|in:apps,ecards,cards,ebanks,data_communications,games,programs',
+    ]);
+
+    $favoriteExists = Favorite::where('user_id', Auth::id())
+        ->where('item_id', $request->item_id)
+        ->where('item_type', $request->item_type)
+        ->exists();
+
+    return response()->json(['is_favorite' => $favoriteExists]);
+}
 }
 

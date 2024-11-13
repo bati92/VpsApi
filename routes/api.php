@@ -23,6 +23,7 @@ use App\Http\Controllers\ApiAppOrderController;
 use App\Http\Controllers\ApiCardOrderController;
 use App\Http\Controllers\ApiECardOrderController;
 use App\Http\Controllers\ApiDataCommunicationOrderController;
+use App\Http\Controllers\ApiDataCommunicationSectionController;
 use App\Http\Controllers\ApiTransferController;
 
 use App\Http\Controllers\ApiEBankOrderController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\ApiTurkificationOrderController;
 use App\Http\Controllers\ApiSliderController;
 use App\Http\Controllers\ApiTransferOrderController;
 
+use App\Http\Controllers\FavoriteController;
 
 
 
@@ -56,20 +58,13 @@ Route::get('transfer-money-firms', [ApiTransferMoneyFirmController::class, 'inde
 Route::get('transfer-money-firm/{id}', [ApiTransferMoneyFirmController::class, 'show']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('logged-in-user', [ApiUserController::class, 'getLoggedInUser']);
-    Route::get('logout', [ApiUserController::class, 'logout']);
-    Route::patch('users/{id}', [ApiUserController::class, 'update']);
-    Route::get('agents/{role_id}', [ApiUserController::class, 'getAgents']);
     
-    Route::post('charge', [ApiTransferMoneyFirmOrderController::class, 'store']);
-    
-    Route::get('myPayments/{id}', [ApiTransferMoneyFirmOrderController::class, 'myPayments']);
-    
-    Route::get('myRequests/{id}', [ApiUserController::class, 'myRequests']);
-    
-});
+Route::post('/favorites/add', [FavoriteController::class, 'addFavorite']);
+Route::post('/favorites/remove', [FavoriteController::class, 'removeFavorite']);
+Route::get('/favorites', [FavoriteController::class, 'getUserFavorites']);
 
-    
+Route::post('/is-favorite', [FavoriteController::class, 'isFavorite']);
+
 Route::post('app/order/{id}',[ApiAppOrderController::class, 'store']);
 
 Route::post('game/order/{id}',[ApiGameOrderController::class, 'store']);
@@ -77,8 +72,7 @@ Route::post('game/order/{id}',[ApiGameOrderController::class, 'store']);
 Route::post('card/order/{id}',[ApiCardOrderController::class, 'store']);
 
 Route::post('ecard/order/{id}',[ApiECardOrderController::class, 'store']);
-
-Route::post('data-comumunication/order/{id}',[ApiDataCommunicationOrderController::class, 'store']);
+Route::post('data-communication/order/{id}',[ApiDataCommunicationOrderController::class, 'store']);
 
 Route::post('ebank/order/{id}',[ApiEBankOrderController::class, 'store']);
 
@@ -91,6 +85,19 @@ Route::post('transfer/order',[ApiTransferOrderController::class, 'store']);
 
 
 
+
+    Route::get('logged-in-user', [ApiUserController::class, 'getLoggedInUser']);
+    Route::get('logout', [ApiUserController::class, 'logout']);
+    Route::patch('users/{id}', [ApiUserController::class, 'update']);
+    Route::get('agents/{role_id}', [ApiUserController::class, 'getAgents']);
+    
+    Route::post('charge', [ApiTransferMoneyFirmOrderController::class, 'store']);
+    
+    Route::get('myPayments/{id}', [ApiTransferMoneyFirmOrderController::class, 'myPayments']);
+    
+    Route::get('myRequests/{id}', [ApiUserController::class, 'myRequests']);
+    
+});
 
 
 
@@ -105,7 +112,10 @@ Route::get('transfer', [ApiTransferController::class, 'index']);
 Route::get('cards', [ApiCardController::class, 'index']);
 Route::get('card/{id}', [ApiCardController::class, 'show']);
 
-Route::get('data-communications', [ApiDataCommunicationController::class, 'index']);
+Route::get('data-communication-sections', [ApiDataCommunicationSectionController::class, 'index']);
+
+Route::get('data-communication-sections/{id}', [ApiDataCommunicationSectionController::class, 'getData']);
+//Route::get('data-communications', [ApiDataCommunicationController::class, 'index']);
 Route::get('data-communication/{id}', [ApiDataCommunicationController::class, 'show']);
 
 

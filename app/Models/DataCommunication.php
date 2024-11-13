@@ -22,11 +22,12 @@ class DataCommunication extends Model
     
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'data_communication_orders', 'data_id', 'user_id');
+        return $this->belongsToMany(User::class, 'data_communication_orders', 'data_communication_id', 'user_id');
     }
     public function dataCommunicationSection(): BelongsTo
     {
         return $this->belongsTo(DataCommunicationSection::class, 'section_id');
     }
+ 
 }
  

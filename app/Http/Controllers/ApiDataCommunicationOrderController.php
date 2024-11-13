@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataCommunicationOrder;
+
+use Illuminate\Support\Facades\Auth;
 class ApiDataCommunicationOrderController extends Controller
 {
     public function store(Request $request)
@@ -11,7 +13,29 @@ class ApiDataCommunicationOrderController extends Controller
        
         $input = $request->all();
      
-        DataCommunicationOrder::create($input);
-        return response()->json(['message'=>'تم تسجيل طلبك    ']);
+       $order= DataCommunicationOrder::create($input);
+        $result=$this->operation($order);
+        return response()->json(['message'=>$result]);
+    }
+
+    public function operation($order)
+    {
+        $user=Auth::user();
+        if($user )
+         {
+            if($user->balance>=$order->price)
+             {
+                $user->balance=$user->balance-$order->price;
+                $user->save();
+                $order->status="مقبول";
+                $order->save();
+                return "تمت عملية الشراء بنجاح";
+
+             }
+             $order->status="مرفوض";
+             $order->save();
+             return "فشل عملية الشراء:الرصيد غير كافي   ";
+         }
+         return "فشل عملية الشراء:الرصيد غير كافي   ";
     }
 }

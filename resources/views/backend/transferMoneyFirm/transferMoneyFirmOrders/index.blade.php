@@ -40,8 +40,8 @@
                                             <th>اسم المرسل</th>
                                             <th>القيمة</th>
                                             <th>العملة</th>
-                                            <th>رقم الوثيقة</th>
                                             <th>كلمة المرور</th>
+                                            <th>الحالة</th>
                                             <th>العمليات</th>
                                         </tr>
                                     </thead>
@@ -55,12 +55,22 @@
                                             <td>{{$transferMoneyFirmOrder->sender}}</td>
                                             <td>{{$transferMoneyFirmOrder->value}}</td>
                                             <td>{{$transferMoneyFirmOrder->currency}}</td>
-                                            <td>{{$transferMoneyFirmOrder->dekont_no}}</td>
                                             <td>{{$transferMoneyFirmOrder->password}}</td>
+                                            <td>{{$transferMoneyFirmOrder->status}}</td>
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$transferMoneyFirmOrder->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
                                                 <a  href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$transferMoneyFirmOrder->id}}" class="btn btn-sm btn-outline-danger" ><i class="icon-trash"></i></a>
+                                                @if($transferMoneyFirmOrder->status=='قيد المراجعة')
+                                                <a href="/transfer-money-firm-order/reject/{{$transferMoneyFirmOrder->id}}" title="رفض الطلب"  class="btn btn-sm btn-danger"><i class="icon-close" style="font-size:19px"></i></a>
+                                                <a href="/transfer-money-firm-order/accept/{{$transferMoneyFirmOrder->id}}" title="قبول الطلب"  class="btn btn-sm btn-success"><i class="icon-check" style="font-size:19px"></i></a>
+                                               @elseif($transferMoneyFirmOrder->status=='مرفوض')
+                                                    <a href="/transfer-money-firm-order/accept/{{$transferMoneyFirmOrder->id}}" title="قبول الطلب"  class="btn btn-sm btn-success"><i class="icon-check" style="font-size:19px"></i></a>
+                                            
+                                                @else
+                                                <a href="/transfer-money-firm-order/reject/{{$transferMoneyFirmOrder->id}}" title="رفض الطلب"  class="btn btn-sm btn-danger"><i class="icon-close" style="font-size:19px"></i></a>
+                                                                                        
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

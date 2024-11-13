@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AppOrder;
+use Illuminate\Support\Facades\Auth;
 class ApiAppOrderController extends Controller
 {
     public function store(Request $request)
@@ -11,11 +12,11 @@ class ApiAppOrderController extends Controller
         $input = $request->all();
         $order=AppOrder::create($input);
         $result=$this->operation($order);
-        return response()->json(['message'=>'تم تسجيل طلبك    ']);
+        return response()->json(['message'=>$result]);
     }
     public function operation($order)
     {
-        $user=auth::user();
+        $user=Auth::user();
         if($user )
          {
             if($user->balance>=$order->price)
@@ -31,5 +32,6 @@ class ApiAppOrderController extends Controller
              $order->save();
              return "فشل عملية الشراء:الرصيد غير كافي   ";
          }
+         return "فشل عملية الشراء:الرصيد غير كافي   ";
     }
 }
