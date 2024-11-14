@@ -14,9 +14,8 @@ class FavoriteController extends Controller
     {
         $request->validate([
             'item_id' => 'required|integer',
-            'item_type' => 'required|string|in:apps,ecards,cards,ebanks,data_communications,games,programs',
+            'item_type' => 'required|string|in:App,Ecard,Card,Ebank,DataCommunication,Game,Program',
         ]);
-
         $favorite = Favorite::create([
             'user_id' => Auth::id(),
             'item_id' => $request->item_id,
@@ -30,7 +29,7 @@ class FavoriteController extends Controller
     {
         $request->validate([
             'item_id' => 'required|integer',
-            'item_type' => 'required|string|in:apps,ecards,cards,ebanks,data_communications,games,programs',
+            'item_type' => 'required|string|in:App,Ecard,Card,Ebank,DataCommunication,Game,Program',
         ]);
 
         $favorite = Favorite::where('user_id', Auth::id())
@@ -48,14 +47,20 @@ class FavoriteController extends Controller
 
     public function getUserFavorites()
     {
-        $favorites = Auth::user()->favorites;
-        return response()->json(['favorites' => $favorites]);
+        $favorites = Auth::user()->favorites()->with('favoritable')->get();
+        foreach ($favorites as $favorite) {
+         dd( $favorite->favoritable->name); // الوصول إلى الكائن App المرتبط من خلال العلاقة favoritable
+          
+         
+            // قم بإضافة المزيد من الحقول حسب الحاجة
+        }
+       // return response()->json(['favorites' => $favorites]);
     }
     public function isFavorite(Request $request)
 {
     $request->validate([
         'item_id' => 'required|integer',
-        'item_type' => 'required|string|in:apps,ecards,cards,ebanks,data_communications,games,programs',
+        'item_type' => 'required|string|in:App,Ecard,Card,Ebank,DataCommunication,Game,Program',
     ]);
 
     $favoriteExists = Favorite::where('user_id', Auth::id())

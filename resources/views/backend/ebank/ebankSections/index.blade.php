@@ -51,7 +51,7 @@
                                             <td class="project-title">
                                                 <h6>{{$ebank->name}}</h6>
                                             </td>
-                                            <td><img src="{{asset('assets/images/ebankSection/'.$ebank->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="{{asset('assets/images/ebankSections/'.$ebank->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                     
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">

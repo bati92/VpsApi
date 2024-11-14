@@ -45,14 +45,14 @@ use App\Models\Setting;
 
 use Illuminate\Support\Facades\Session;
 
-
+use App\Http\Controllers\FavoriteController;
 
 use App\Http\Middleware\LoadSettings;
 use App\Mail\EbankEmail;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Mail;
 
-
+Route::get('/favorites', [FavoriteController::class, 'getUserFavorites']);
 
     Route::get('/ss',function(){
 Mail::raw('This is a test email using MailerSender', function ($message) {

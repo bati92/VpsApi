@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-     Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('item_id');
-            $table->enum('item_type', ['apps', 'ecards', 'cards', 'ebanks', 'data_communications', 'games', 'programs']);
+            $table->enum('item_type', ['App', 'Ecard', 'Card', 'Ebank', 'DataCommunication', 'Game', 'Program']);
             $table->timestamps();
+
+            // إضافة فهرس مركب لتحسين أداء الاستعلامات التي تبحث باستخدام item_id و item_type
+            $table->index(['item_id', 'item_type']);
         });
     }
 
-
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('favorites');
     }
-    
-
-
 };
