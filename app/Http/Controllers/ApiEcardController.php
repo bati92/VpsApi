@@ -14,6 +14,7 @@ class ApiEcardController extends Controller
       
         foreach ($ecards as $app) {
             $app->image_url = asset('assets/images/ecards/'. $app->image);  // إنشاء رابط للصورة
+            
         }
         return response()->json(['ecards'=>$ecards]);
     }

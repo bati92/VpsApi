@@ -54,7 +54,7 @@
                                             </td>
                                         
 
-                                            <td><img src="{{asset('assets/images/program/'.$program->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="{{asset('assets/images/programs/'.$program->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                            
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">

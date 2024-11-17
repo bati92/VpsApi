@@ -24,7 +24,7 @@ class TransferMoneyFirmController extends Controller
         {
             if ($file = $request->file('image')) {
                 $name = 'app'.time().$file->getClientOriginalName();
-                $file->move('assets/images/TransferMoneyFirm/', $name);
+                $file->move('assets/images/transferMoneyFirm/', $name);
                 $input['image'] = $name;
             }
         }
@@ -44,7 +44,7 @@ class TransferMoneyFirmController extends Controller
         {
            if ($file = $request->file('image')) {
                $name = 'app'.time().$file->getClientOriginalName();
-               $file->move('assets/images/TransferMoneyFirm/', $name);
+               $file->move('assets/images/transferMoneyFirm/', $name);
                $input['image'] = $name;
             }
         }

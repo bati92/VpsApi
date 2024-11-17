@@ -25,7 +25,7 @@ class DataCommunicationSectionController extends Controller
         {
         if ($file = $request->file('image')) {
             $name = 'data'.time().$file->getClientOriginalName();
-            $file->move('assets/images/dataSections/', $name);
+            $file->move('assets/images/dataCommunicationSections/', $name);
             $input['image'] = $name;
             }
         }
@@ -47,7 +47,7 @@ class DataCommunicationSectionController extends Controller
         {
             if ($file = $request->file('image')) {
                 $name = 'data_'.time().$file->getClientOriginalName();
-                $file->move('images/dataSections/', $name);
+                $file->move('assets/images/dataCommunicationSections/', $name);
                 $input['image'] = $name;
             }
        }

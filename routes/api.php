@@ -94,8 +94,8 @@ Route::post('transfer/order',[ApiTransferOrderController::class, 'store']);
     Route::post('charge', [ApiTransferMoneyFirmOrderController::class, 'store']);
     
     Route::get('myPayments/{id}', [ApiTransferMoneyFirmOrderController::class, 'myPayments']);
-    
     Route::get('myRequests/{id}', [ApiUserController::class, 'myRequests']);
+
     
 });
 

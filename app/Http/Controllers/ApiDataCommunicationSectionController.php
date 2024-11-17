@@ -12,8 +12,9 @@ class ApiDataCommunicationSectionController extends Controller
     {
         $dataSections=DB::table('data_communication_sections')->select('*')->orderBy('id', 'desc')->paginate(500);
        foreach ($dataSections as $data) {
-         $data->image_url = asset('assets/images/dataSections/' . $data->image);  // إنشاء رابط للصورة
-     }
+         $data->image_url = asset('assets/images/dataCommunicationSections/' . $data->image);  // إنشاء رابط للصورة
+         
+        }
        return response()->json(['dataSections'=> $dataSections]);
     }
 
@@ -23,8 +24,9 @@ class ApiDataCommunicationSectionController extends Controller
        $dataCommunication = $section->dataCommunications;
        foreach ($dataCommunication as $app) {
          $app->image_url = asset('assets/images/data/' . $app->image);  // إنشاء رابط للصورة
-     }
-       return response()->json(['dataCommunication'=> $dataCommunication ]);
+         $app->save();
+        }
+       return response()->json(['data-communications'=> $dataCommunication ]);
     }
 
 }

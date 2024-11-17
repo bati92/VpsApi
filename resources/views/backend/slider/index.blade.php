@@ -10,11 +10,11 @@
         <div class="block-header">
             <div class="row">
                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>معرض jjjjjjالصور</h2>
+                    <h2> السلايدر</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-dashboard"></i></a></li>                            
                         <li class="breadcrumb-item">لوحة التحكم</li>
-                        <li class="breadcrumb-item active"> معرض الصور</li>
+                        <li class="breadcrumb-item active">  السلايدر</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -49,7 +49,7 @@
                                             <td class="project-title">
                                                 <h6>{{$slider->title}}</h6>
                                             </td>
-                                            <td><img src="{{ asset('images/sliders/' . $slider->image) }}" alt="{{$slider->title}}" data-toggle="tooltip" data-placement="top" title="{{$slider->title}}" class="width35 rounded"></td>
+                                            <td><img src="{{ asset('assets/images/sliders/' . $slider->image) }}" alt="{{$slider->title}}" data-toggle="tooltip" data-placement="top" title="{{$slider->title}}" class="width35 rounded"></td>
                                             <td class="project-actions">
                                                 <a href="#defaultModal" data-toggle="modal" data-target="#defaultModal">
                                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#editModal{{$slider->id}}" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>

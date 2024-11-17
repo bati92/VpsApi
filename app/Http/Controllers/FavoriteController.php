@@ -3,8 +3,11 @@
 // app/Http/Controllers/FavoriteController.php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Favorite;
+
+use App\Models\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,17 +48,64 @@ class FavoriteController extends Controller
         return response()->json(['message' => 'Favorite not found'], 404);
     }
 
-    public function getUserFavorites()
-    {
-        $favorites = Auth::user()->favorites()->with('favoritable')->get();
-        foreach ($favorites as $favorite) {
-         dd( $favorite->favoritable->name); // الوصول إلى الكائن App المرتبط من خلال العلاقة favoritable
-          
-         
-            // قم بإضافة المزيد من الحقول حسب الحاجة
+
+
+public function getUserFavorites()
+{  $tableMapping = [
+    'App' => 'apps',
+    'Game' => 'games',
+    'DataCommunication' => 'data_communications',
+    'Program' => 'programs',
+    'Ecard' => 'ecards',
+    'Card' => 'cards',
+    'Ebank' => 'ebanks'
+];
+$slugTable = [
+    'App' => 'app',
+    'Game' => 'game',
+    'DataCommunication' => 'data-communication',
+    'Program' => 'program',
+    'Ecard' => 'ecard',
+    'Card' => 'card',
+    'Ebank' => 'ebank'
+];
+
+$favorites = Auth::user()->favorites()->get();
+$results = [];
+
+foreach ($favorites as $favorite) {
+    // الحصول على اسم الجدول من الخريطة بناءً على `item_type`
+    $table = $tableMapping[$favorite->item_type] ?? null;
+    
+    $slug = $slugTable[$favorite->item_type] ?? null;
+
+    // التأكد من أن اسم الجدول موجود في الخريطة
+    if ($table) {
+        $query = "SELECT id, name, image_url, price, status FROM {$table} WHERE id = :item_id LIMIT 1";
+        
+        // تنفيذ الاستعلام
+        $item = DB::select($query, ['item_id' => $favorite->item_id]);
+        
+        if (!empty($item)) {
+            $results[] = [
+                'id' => $item[0]->id,
+                'section_id' => isset($item[0]->section_id) ? $item[0]->section_id : 0,
+                'name' => $item[0]->name,
+                'image_url' => $item[0]->image_url,
+                'price' => $item[0]->price,
+                'status' => $item[0]->status,
+                'slug' => $slug,
+            ];
         }
-       // return response()->json(['favorites' => $favorites]);
     }
+}
+
+
+    return response()->json(['favorites' => $results]);
+}
+
+    
+
     public function isFavorite(Request $request)
 {
     $request->validate([

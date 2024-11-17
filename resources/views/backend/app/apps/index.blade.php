@@ -39,6 +39,7 @@
                                     <thead>
                                         <tr>                                            
                                             <th>اسم التطبيق</th>
+                                            <th>الصورة </th>
                                             <th>السعر</th>
                                             <th>التصنيف </th>
                                             <th>العمليات</th>
@@ -51,6 +52,8 @@
                                             <td class="project-title">
                                                 <h6>{{$app->name}}</h6>
                                             </td>
+                                            <td><img src="{{asset('assets/images/apps/'.$app->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                    
                                             <td>{{$app->price}}</td>
                                             <td class="project-title">
                                                 <h6>  

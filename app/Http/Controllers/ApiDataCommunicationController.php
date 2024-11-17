@@ -14,6 +14,7 @@ class ApiDataCommunicationController extends Controller
         $dataCommunications=DB::table('data_communications')->select('*')->orderBy('id', 'desc')->paginate(500);
         foreach ($dataCommunications as $app) {
             $app->image_url = asset('assets/images/data/' . $app->image);  // إنشاء رابط للصورة
+           
         }
        
         return response()->json(['dataCommunications'=>$dataCommunications ]);

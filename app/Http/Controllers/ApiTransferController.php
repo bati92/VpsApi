@@ -14,6 +14,7 @@ class ApiTransferController extends Controller
         $transferOrder=DB::table('transfer_orders')->select('*')->orderBy('id', 'desc')->get();
         foreach ($apps as $app) {
             $app->image_url = asset('assets/images/transfers/' . $trans->image);  // إنشاء رابط للصورة
+        
         }
         return response()->json(['transferOrder'=>$transferMoneyFirms]);
     }

@@ -26,6 +26,7 @@ class ApiAppSectionController extends Controller
        $apps = $section->apps;
        foreach ($apps as $app) {
          $app->image_url = asset('assets/images/apps/' . $app->image);  // إنشاء رابط للصورة
+            $app->save();
      }
        return response()->json(['apps'=> $apps ]);
     }

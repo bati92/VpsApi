@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 
 use App\Models\AppOrder;
 use Illuminate\Support\Facades\DB;
@@ -58,9 +59,6 @@ class ApiUserController extends Controller
             $input['mobile'] = $input['code'] . $input['mobile'];
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
-    
-            // إرسال بريد إلكتروني
-          //  Mail::to($input['email'])->send(new LoginEbank());
     
             return response()->json(['message' => 'تمت إضافة المستخدم بنجاح']);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -137,30 +135,71 @@ class ApiUserController extends Controller
 
     
     public function myRequests($id)
-    {   $orders = collect();
-        $user=User::findOrFail($id);
-        $programs=$user->programs;
-        $turkification=$user->turkificationOrders;
-        $apps=$user->apps;
-        $games=$user->games;
-        $cards=$user->cards;
-        $ecards=$user->ecards;
-        $ebanks=$user->ebanks;
-        $apps=$user->apps;
-
-        $transfer=$user->transferOrders;
+    {
+        $orders = collect();
+        $user = User::findOrFail($id);
+    
+        $programs = $user->programs->map(function ($item) {
+            $item->type = 'Program';
+            return $item;
+        });
+    
+        $turkification = $user->turkificationOrders->map(function ($item) {
+            $item->type = 'Turkification';
+            return $item;
+        });
+    
+        $apps = $user->apps->map(function ($item) {
+            $item->type = 'App';
+            return $item;
+        });
+    
+        $games = $user->games->map(function ($item) {
+            $item->type = 'Game';
+            return $item;
+        });
+    
+        $cards = $user->cards->map(function ($item) {
+            $item->type = 'Card';
+            return $item;
+        });
+    
+        $ecards = $user->ecards->map(function ($item) {
+            $item->type = 'Ecard';
+            return $item;
+        });
+    
+        $ebanks = $user->ebanks->map(function ($item) {
+            $item->type = 'Ebank';
+            return $item;
+        });
+    
+        $transfer = $user->transferOrders->map(function ($item) {
+            $item->type = 'Transfer';
+            return $item;
+        });
+    
+        // دمج الطلبات
         $orders = $orders->merge($programs)
-        ->merge($turkification)
-        ->merge($apps)
-        ->merge($games)
-        ->merge($cards)
-        ->merge($ecards)
-        ->merge($ebanks)
-        ->merge($transfer);
-      
-        return response()->json(["orders"=>$orders]);
+            ->merge($turkification)
+            ->merge($apps)
+            ->merge($games)
+            ->merge($cards)
+            ->merge($ecards)
+            ->merge($ebanks)
+            ->merge($transfer);
+    
+        // تحديث التاريخ بعد الدمج
+        $orders = $orders->map(function ($item) {
+            $item->created_at = \Carbon\Carbon::parse($item->created_at)->format('Y-m-d');
+            return $item;
+        });
+    
+        return response()->json(["orders" => $orders]);
     }
-
+    
+    
+    
     public function update(Request $request,  $id)
     { 
         try {

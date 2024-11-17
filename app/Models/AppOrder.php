@@ -20,4 +20,9 @@ class AppOrder extends Model
         'note',
         'status'
     ];
+    public function app()
+{
+    return $this->belongsTo(App::class, 'app_id');
+}
+
 }

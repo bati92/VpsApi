@@ -13,7 +13,8 @@ class ApiGameController extends Controller
        $games=DB::table('games')->select('*')->orderBy('id', 'desc')->paginate(500);
        foreach ($games as $app) {
          $app->image_url = asset('assets/images/games/' . $trans->image);  // إنشاء رابط للصورة
-     }
+       
+      }
        return response()->json(['games'=>$games ]);
     }
     public function show($id)

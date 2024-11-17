@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->foreign('transfer_money_firm_id')->references('id')->on('transfer_money_firms')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('sender')->nullable();
-            $table->integer('value')->nullable();
+            $table->decimal('value', 8, 4);
             $table->string('currency')->nullable();
             $table->integer('dekont_no')->nullable();
             $table->string('account_salary_name')->nullable();

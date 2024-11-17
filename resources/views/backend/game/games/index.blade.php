@@ -56,7 +56,7 @@
                                             </td>
                                         
 
-                                            <td><img src="{{asset('assets/images/game/'.$game->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="{{asset('assets/images/games/'.$game->image)}}" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td class="project-title">
                                                 <h6>{{$game->price}}</h6>
                                             </td>

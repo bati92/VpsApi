@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('price');
+            $table->decimal('price', 8, 4);
             $table->integer('section_id');
             $table->foreign('section_id')->references('id')->on('app_sections')->onDelete('cascade');
             $table->string('image')->nullable();

@@ -31,5 +31,9 @@ class App extends Model
     {
         return $this->belongsTo(AppSection::class, 'section_id');
     }
-
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favoritable');
+    }
+    
 }

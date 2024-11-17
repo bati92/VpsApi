@@ -14,7 +14,8 @@ class ApiAppController extends Controller
        $apps=DB::table('apps')->select('*')->orderBy('id', 'desc')->paginate(500);
       // response()->json(['apps'=>auth()->user() ]);
        foreach ($apps as $app) {
-         $app->image_url = asset('assets/images/apps/' . $trans->image);  // إنشاء رابط للصورة
+         $app->image_url = asset('assets/images/apps/' . $app->image);  // إنشاء رابط للصورة
+        // $app->save();
          $app->price=$this->getPrice($app);
      }
        return response()->json(['apps'=>$apps ]);
